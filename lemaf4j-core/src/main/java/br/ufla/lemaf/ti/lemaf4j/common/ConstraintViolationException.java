@@ -32,7 +32,7 @@ public final class ConstraintViolationException extends RuntimeException {
      * @param message A mensagem
      * @param constraintViolations Constraint violations.
      */
-    public ConstraintViolationException(final String message,
+    ConstraintViolationException(final String message,
                                         final Set<ConstraintViolation<Object>> constraintViolations) {
         super(message);
         this.constraintViolations = constraintViolations;

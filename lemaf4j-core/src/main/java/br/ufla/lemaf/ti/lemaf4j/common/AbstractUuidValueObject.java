@@ -1,4 +1,4 @@
-package br.ufla.lemaf.ti.lemaf4j.vo;
+package br.ufla.lemaf.ti.lemaf4j.common;
 
 import java.io.Serializable;
 import java.util.UUID;

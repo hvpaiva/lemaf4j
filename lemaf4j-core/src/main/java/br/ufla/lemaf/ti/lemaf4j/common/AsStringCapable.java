@@ -1,4 +1,4 @@
-package br.ufla.lemaf.ti.lemaf4j.vo;
+package br.ufla.lemaf.ti.lemaf4j.common;
 
 /**
  * Provem uma representação em String

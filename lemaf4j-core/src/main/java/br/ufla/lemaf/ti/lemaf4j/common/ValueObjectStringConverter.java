@@ -1,8 +1,4 @@
-package br.ufla.lemaf.ti.lemaf4j.vo;
-
-import br.ufla.lemaf.ti.lemaf4j.common.Contract;
-import br.ufla.lemaf.ti.lemaf4j.vo.AsStringCapable;
-import br.ufla.lemaf.ti.lemaf4j.vo.ValueOfCapable;
+package br.ufla.lemaf.ti.lemaf4j.common;
 
 import javax.persistence.AttributeConverter;
 import javax.validation.constraints.NotNull;

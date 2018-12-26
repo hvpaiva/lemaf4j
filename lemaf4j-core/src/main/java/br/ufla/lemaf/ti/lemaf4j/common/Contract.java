@@ -10,6 +10,8 @@ import javax.validation.groups.Default;
 import java.util.HashSet;
 import java.util.Set;
 
+import static br.ufla.lemaf.ti.lemaf4j.common.Error.*;
+
 /**
  * Classe utilitária para asserções em
  * objetos.
@@ -69,7 +71,7 @@ public final class Contract {
                                          final Object value) throws ConstraintViolationException {
         if (value == null) {
             throw new ConstraintViolationException(
-                    "O argumento '" + name + "' não pode ser nulo."
+                    ErrorMessageFactory.of(ARGUMENTO_NULO, name)
             );
         }
     }
@@ -83,11 +85,12 @@ public final class Contract {
      * @param value Valor a se checar
      * @throws ConstraintViolationException O valor foi nulo ou vazio
      */
-    public static void requireArgNotEmpty(@NotNull final String name, final String value) throws ConstraintViolationException {
+    public static void requireArgNotEmpty(@NotNull final String name,
+                                          final String value) throws ConstraintViolationException {
         requireArgNotNull(name, value);
         if (value.length() < 1) {
             throw new ConstraintViolationException(
-                    "O argumento '" + name + "' não pode ser vazio!"
+                    ErrorMessageFactory.of(ARGUMENTO_VAZIO, name)
             );
         }
     }
@@ -105,10 +108,12 @@ public final class Contract {
                                            final int max) throws ConstraintViolationException {
         if (value.length() > max) {
             throw new ConstraintViolationException(
-                    "O tamanho máximo para o argumento '"
-                            + name + "' é "
-                            + max + ", mas foi: "
-                            + value.length()
+                    ErrorMessageFactory.of(
+                            ARGUMENTO_MAX_LENGTH,
+                            name,
+                            max,
+                            value.length()
+                    )
             );
         }
     }
@@ -126,10 +131,12 @@ public final class Contract {
                                            final int min) throws ConstraintViolationException {
         if (value.length() < min) {
             throw new ConstraintViolationException(
-                    "O tamanho mínimo para o argumento '"
-                            + name + "' é "
-                            + min + ", mas foi: "
-                            + value.length()
+                    ErrorMessageFactory.of(
+                            ARGUMENTO_MIN_LENGTH,
+                            name,
+                            min,
+                            value.length()
+                    )
             );
         }
     }
@@ -147,10 +154,7 @@ public final class Contract {
                                      final long max) throws ConstraintViolationException {
         if (value > max) {
             throw new ConstraintViolationException(
-                    "O valor máximo para o argumento '"
-                            + name + "' é "
-                            + max + ", mas foi: "
-                            + value
+                    ErrorMessageFactory.of(VALOR_MAX_LENGTH, name, max, value)
             );
         }
     }
@@ -168,10 +172,7 @@ public final class Contract {
                                      final long min) throws ConstraintViolationException {
         if (value < min) {
             throw new ConstraintViolationException(
-                    "O valor mínimo para o argumento '"
-                            + name + "' é "
-                            + min + ", mas foi: "
-                            + value
+                    ErrorMessageFactory.of(VALOR_MIN_LENGTH, name, min, value)
             );
         }
     }

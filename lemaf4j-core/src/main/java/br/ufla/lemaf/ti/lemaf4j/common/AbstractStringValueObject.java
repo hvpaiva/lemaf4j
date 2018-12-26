@@ -1,4 +1,4 @@
-package br.ufla.lemaf.ti.lemaf4j.vo;
+package br.ufla.lemaf.ti.lemaf4j.common;
 
 import java.io.Serializable;
 
@@ -10,10 +10,11 @@ import java.io.Serializable;
  * @author Highlander Paiva
  * @since 1.0
  */
-public abstract class AbstractIntegerValueObject implements
-        ValueObjectWithBaseType<Integer>,
-        Comparable<AbstractIntegerValueObject>,
-        Serializable {
+public abstract class AbstractStringValueObject implements
+        ValueObjectWithBaseType<String>,
+        Comparable<AbstractStringValueObject>,
+        Serializable,
+        AsStringCapable {
 
     private static final long serialVersionUID = 1000L;
 
@@ -33,17 +34,32 @@ public abstract class AbstractIntegerValueObject implements
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final var other = (AbstractIntegerValueObject) obj;
+        final var other = (AbstractStringValueObject) obj;
         return asBaseType().equals(other.asBaseType());
     }
 
     @Override
-    public final int compareTo(final AbstractIntegerValueObject other) {
-        return asBaseType().compareTo(other.asBaseType());
+    public final int compareTo(final AbstractStringValueObject other) {
+        return this.asBaseType().compareTo(other.asBaseType());
+    }
+
+    /**
+     * Retorna o length da String.
+     *
+     * @return Número de caracteres
+     */
+    public final int length() {
+        return asBaseType().length();
     }
 
     @Override
-    public final Class<Integer> getBaseType() {
-        return Integer.class;
+    public final Class<String> getBaseType() {
+        return String.class;
+    }
+
+    @Override
+    public final String asString() {
+        return asBaseType();
     }
 }
+

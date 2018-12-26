@@ -1,4 +1,4 @@
-package br.ufla.lemaf.ti.lemaf4j.vo;
+package br.ufla.lemaf.ti.lemaf4j.common;
 
 /**
  * Converte um Value Object em seu tipo
@@ -23,7 +23,7 @@ public interface ValueObjectConverter<BASE_TYPE, VO_TYPE extends ValueObjectWith
      *
      * @return O tipo do Value Object
      */
-    Class<VO_TYPE> getValueObjjectClass();
+    Class<VO_TYPE> getValueObjectClass();
 
     /**
      * Verifica se o valor dado pode ser convertido em um

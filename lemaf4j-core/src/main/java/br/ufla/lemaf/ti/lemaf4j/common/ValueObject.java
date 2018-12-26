@@ -1,4 +1,4 @@
-package br.ufla.lemaf.ti.lemaf4j.vo;
+package br.ufla.lemaf.ti.lemaf4j.common;
 
 /**
  * Interface para um Objeto imutável que representa um
@@ -12,5 +12,5 @@ package br.ufla.lemaf.ti.lemaf4j.vo;
  * @author Highlander Paiva
  * @since 1.0
  */
-public interface ValueObject {
+interface ValueObject {
 }

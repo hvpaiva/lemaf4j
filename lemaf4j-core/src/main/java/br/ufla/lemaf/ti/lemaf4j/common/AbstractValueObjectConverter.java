@@ -1,4 +1,4 @@
-package br.ufla.lemaf.ti.lemaf4j.vo;
+package br.ufla.lemaf.ti.lemaf4j.common;
 
 import javax.persistence.AttributeConverter;
 import javax.xml.bind.annotation.adapters.XmlAdapter;

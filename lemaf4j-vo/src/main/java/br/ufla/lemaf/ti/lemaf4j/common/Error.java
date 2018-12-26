@@ -13,7 +13,9 @@ public enum Error {
     ARGUMENTO_MAX_LENGTH("O tamanho máximo para o argumento '%s' é %d, mas foi: %f"),
     ARGUMENTO_MIN_LENGTH("O tamanho mínimo para o argumento '%s' é %d, mas foi: %f"),
     VALOR_MAX_LENGTH("O valor máximo para o argumento '%s' é %d, mas foi: %f"),
-    VALOR_MIN_LENGTH("O valor mínimo para o argumento '%s' é %d, mas foi: %f");
+    VALOR_MIN_LENGTH("O valor mínimo para o argumento '%s' é %d, mas foi: %f"),
+    MULTIPLE_EMAIL("O argumento 'emailAddress' não é um único endereço de email: '%s'"),
+    INVALID_EMAIL("O argumento 'emailAddress' não é válido: %s");
 
     private String message;
 

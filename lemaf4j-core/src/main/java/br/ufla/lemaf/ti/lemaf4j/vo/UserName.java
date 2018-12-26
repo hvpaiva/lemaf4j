@@ -1,11 +1,14 @@
 package br.ufla.lemaf.ti.lemaf4j.vo;
 
+import br.ufla.lemaf.ti.lemaf4j.converters.UserNameConverter;
 import br.ufla.lemaf.ti.lemaf4j.types.UserNameStr;
 import br.ufla.lemaf.ti.lemaf4j.common.Contract;
 import br.ufla.lemaf.ti.lemaf4j.validators.UserNameStrValidator;
 import br.ufla.lemaf.ti.lemaf4j.common.AbstractStringValueObject;
 
+import javax.annotation.concurrent.Immutable;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * Value Object de UserName:
@@ -17,6 +20,8 @@ import javax.validation.constraints.NotNull;
  * - Underscore (_)
  * - Não começar com hífem, underscore ou número
  */
+@Immutable
+@XmlJavaTypeAdapter(UserNameConverter.class)
 public final class UserName extends AbstractStringValueObject {
 
     private static final long serialVersionUID = 9055520843135472634L;

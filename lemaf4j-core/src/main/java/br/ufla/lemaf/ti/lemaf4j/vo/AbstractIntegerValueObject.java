@@ -33,7 +33,7 @@ public abstract class AbstractIntegerValueObject implements
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final AbstractIntegerValueObject other = (AbstractIntegerValueObject) obj;
+        final var other = (AbstractIntegerValueObject) obj;
         return asBaseType().equals(other.asBaseType());
     }
 

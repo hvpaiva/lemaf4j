@@ -34,7 +34,7 @@ public abstract class AbstractStringValueObject implements
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final AbstractStringValueObject other = (AbstractStringValueObject) obj;
+        final var other = (AbstractStringValueObject) obj;
         return asBaseType().equals(other.asBaseType());
     }
 

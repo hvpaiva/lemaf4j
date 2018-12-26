@@ -33,7 +33,7 @@ public abstract class AbstractLongValueObject implements
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final AbstractLongValueObject other = (AbstractLongValueObject) obj;
+        final var other = (AbstractLongValueObject) obj;
         return asBaseType().equals(other.asBaseType());
     }
 

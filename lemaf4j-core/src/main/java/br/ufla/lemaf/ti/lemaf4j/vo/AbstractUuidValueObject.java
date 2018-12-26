@@ -37,7 +37,7 @@ public abstract class AbstractUuidValueObject implements
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final AbstractUuidValueObject other = (AbstractUuidValueObject) obj;
+        final var other = (AbstractUuidValueObject) obj;
         return asBaseType().equals(other.asBaseType());
     }
 

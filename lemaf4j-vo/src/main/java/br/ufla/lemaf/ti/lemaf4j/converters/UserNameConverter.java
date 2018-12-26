@@ -37,17 +37,15 @@ public final class UserNameConverter
 
     @Override
     public final UserName toVO(final String value) {
-        if (value == null) {
-            return null;
-        }
+        if (value == null) return null;
+
         return new UserName(value);
     }
 
     @Override
     public final String fromVO(final UserName value) {
-        if (value == null) {
-            return null;
-        }
+        if (value == null) return null;
+
         return value.toString();
     }
 

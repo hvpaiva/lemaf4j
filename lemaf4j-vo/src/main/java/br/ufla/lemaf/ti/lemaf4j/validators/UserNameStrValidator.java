@@ -28,8 +28,8 @@ import java.util.regex.Pattern;
  */
 public final class UserNameStrValidator implements ConstraintValidator<UserNameStr, String> {
 
-    public static final Integer MAX_LENGTH = 20;
-    public static final Integer MIN_LENGTH = 3;
+    private static final Integer MAX_LENGTH = 20;
+    private static final Integer MIN_LENGTH = 3;
 
     private static final Pattern PATTERN = Pattern.compile("[a-z][0-9a-z_\\-]*");
 
@@ -49,32 +49,31 @@ public final class UserNameStrValidator implements ConstraintValidator<UserNameS
      * @return Retorna <code>true</code> se for um id válido
      *         de usuário, senão retornará <code>false</code>.
      *         Se o argumento for <code>null</code> retornará
-     *         <code>true</code>
+     *         <code>false</code>
      */
     public static boolean isValid(final String value) {
-        if (value == null) {
-            return true;
-        }
-        if ((value.length() < MIN_LENGTH) || (value.length() > MAX_LENGTH)) {
-            return false;
-        }
+        if ((value == null)
+                || (value.isEmpty())
+                || (value.length() < MIN_LENGTH)
+                || (value.length() > MAX_LENGTH)) return false;
+
         return PATTERN.matcher(value).matches();
     }
 
     /**
-     * Converte o argumento e lança exceção se ele não for válido.
+     * Confere se o argumento é válido,
+     * lançando uma exceção em caso negativo.
      *
      * @param name O nome do valor para a mensagem de erro
      * @param value Valor a se checar
      * @throws ConstraintViolationException
      *             O valor não é válido
      */
-    public static void parseArg(@NotNull final String name,
+    public static void requireArgValid(@NotNull final String name,
                                 @NotNull final String value) throws ConstraintViolationException {
-        final var trimmed = value.trim().toLowerCase();
-        if (!isValid(trimmed)) {
+        if (!isValid(value)) {
             throw new ConstraintViolationException(
-                    ErrorMessageFactory.of(Error.ARGUMENTO_INVALIDO, name, trimmed)
+                    ErrorMessageFactory.of(Error.ARGUMENTO_INVALIDO, name, value)
             );
         }
     }

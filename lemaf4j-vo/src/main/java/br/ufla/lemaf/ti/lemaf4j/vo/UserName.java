@@ -45,7 +45,7 @@ public final class UserName extends AbstractStringValueObject {
     public UserName(@NotNull @UserNameStr final String userName) {
         super();
         Contract.requireArgNotNull("userName", userName);
-        UserNameStrValidator.parseArg("userName", userName);
+        UserNameStrValidator.requireArgValid("userName", userName);
         this.str = userName.trim().toLowerCase();
     }
 

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ddd-core</artifactId>
+    <artifactId>lemaf4j-utils</artifactId>
 
 
 </project>

@@ -9,6 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>lemaf4j-core</artifactId>
+    <artifactId>lemaf4j-vo</artifactId>
 
 </project>

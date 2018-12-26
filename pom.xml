@@ -30,8 +30,10 @@
     </properties>
 
     <modules>
-        <module>ddd-core</module>
-        <module>lemaf4j-core</module>
+        <module>lemaf4j-vo</module>
+        <module>lemaf4j-unit</module>
+        <module>lemaf4j-ddd</module>
+        <module>lemaf4j-utils</module>
     </modules>
 
     <dependencyManagement>
@@ -112,6 +114,27 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>25.0-jre</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>br.ufla.lemaf.ti</groupId>
+                <artifactId>lemaf4j-vo</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>br.ufla.lemaf.ti</groupId>
+                <artifactId>lemaf4j-utils</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>br.ufla.lemaf.ti</groupId>
+                <artifactId>lemaf4j-ddd</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>br.ufla.lemaf.ti</groupId>
+                <artifactId>lemaf4j-unit</artifactId>
+                <version>1.0-SNAPSHOT</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>

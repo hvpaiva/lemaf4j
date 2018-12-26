@@ -1,8 +1,5 @@
 package br.ufla.lemaf.ti.lemaf4j.vo;
 
-import br.ufla.lemaf.ti.lemaf4j.vo.ValueObjectConverter;
-import br.ufla.lemaf.ti.lemaf4j.vo.ValueObjectWithBaseType;
-
 import javax.persistence.AttributeConverter;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 

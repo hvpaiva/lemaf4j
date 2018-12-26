@@ -28,7 +28,7 @@ public interface ValueObjectConverter<BASE_TYPE, VO_TYPE extends ValueObjectWith
     /**
      * Verifica se o valor dado pode ser convertido em um
      * value object usando o factory.
-     * Um parâmetro <code>null</code> irá retornar <code>true</code>.
+     * Um parâmetro <code>null</code> irá retornar <code>false</code>.
      *
      * @param value Valor a se checar
      * @return <code>true</code> se o valor pode ser convertido,

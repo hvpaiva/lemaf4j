@@ -19,7 +19,7 @@ public interface ValueObjectValidator<B> {
      * @param value O valor do argumento
      * @throws ConstraintViolationException Quando o argumento não é válido
      */
-    void assertValid(String name, B value) throws ConstraintViolationException;
+    void assertValid(String name, B value);
 
     /**
      * Confere se o valor dado é um endereço válido

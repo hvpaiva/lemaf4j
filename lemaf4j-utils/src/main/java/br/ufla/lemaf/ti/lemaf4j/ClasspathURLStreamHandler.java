@@ -32,7 +32,7 @@ public final class ClasspathURLStreamHandler extends URLStreamHandler {
     }
 
     @Override
-    protected final URLConnection openConnection(final URL url) throws IOException {
+    protected URLConnection openConnection(final URL url) throws IOException {
         final String path = url.getPath();
         final URL resourceUrl = cl.getResource(path);
         if (resourceUrl == null) {

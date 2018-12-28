@@ -5,7 +5,9 @@ import java.util.Collections;
 import java.util.Set;
 
 /**
- * O contrato checado foi violado.
+ * Exceção de validade.
+ * Lançada quando se espera um comportamento
+ * de um objeto, e o mesmo não é atendido.
  *
  * @author Highlander Paiva
  * @since 1.0
@@ -27,28 +29,27 @@ public final class ConstraintViolationException extends RuntimeException {
     }
 
     /**
-     * Construtor com mensagem de erro e constraint violations.
+     * Construtor com mensagem de erro e
+     * constraint violations.
      *
-     * @param message A mensagem
+     * @param message              A mensagem
      * @param constraintViolations Constraint violations.
      */
     ConstraintViolationException(final String message,
-                                        final Set<ConstraintViolation<Object>> constraintViolations) {
+                                 final Set<ConstraintViolation<Object>> constraintViolations) {
         super(message);
         this.constraintViolations = constraintViolations;
     }
 
     /**
-     * Returna as constraint violations.
+     * Retorna as constraint violations.
      *
      * @return Set imutável de constraint violations ou
-     *         <code>null</code> se apenas uma mensagem
-     *         é acessível.
+     * Set vazio se não houver constraint violations.
      */
-    public final Set<ConstraintViolation<Object>> getConstraintViolations() {
-        if (constraintViolations == null) {
-            return null;
-        }
+    public Set<ConstraintViolation<Object>> getConstraintViolations() {
+        if (constraintViolations == null) return Collections.emptySet();
+
         return Collections.unmodifiableSet(constraintViolations);
     }
 

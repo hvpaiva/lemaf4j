@@ -29,7 +29,7 @@ public final class IllegalNullArgumentException extends IllegalArgumentException
      *
      * @return O nome do argumento
      */
-    public final String getArgument() {
+    public String getArgument() {
         return argument;
     }
 

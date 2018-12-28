@@ -11,13 +11,13 @@ public interface Cancelable {
     /**
      * Tenta cancelar uma unidade de trabalho.
      */
-    public void cancel();
+    void cancel();
 
     /**
      * Retorna se a unidade de trabalho foi cancelada.
      *
      * @return Se foi cancelada <code>true</code> senão <code>false</code>
      */
-    public boolean isCanceled();
+    boolean isCanceled();
 
 }

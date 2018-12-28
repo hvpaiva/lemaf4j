@@ -1,7 +1,7 @@
 package br.ufla.lemaf.ti.lemaf4j.converters;
 
-import br.ufla.lemaf.ti.lemaf4j.validators.UserNameStrValidator;
-import br.ufla.lemaf.ti.lemaf4j.common.AbstractValueObjectConverter;
+import br.ufla.lemaf.ti.lemaf4j.validators.UserNameValidator;
+import br.ufla.lemaf.ti.lemaf4j.AbstractValueObjectConverter;
 import br.ufla.lemaf.ti.lemaf4j.vo.UserName;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -20,30 +20,40 @@ public final class UserNameConverter
         extends AbstractValueObjectConverter<String, UserName>
         implements AttributeConverter<UserName, String> {
 
+    private UserNameValidator validator;
+
+    /**
+     * Construtor padrão do UserNameConverter.
+     * Injeta a dependência de UserNameValidador.
+     */
+    public UserNameConverter() {
+        this.validator = new UserNameValidator();
+    }
+
     @Override
     public Class<String> getBaseTypeClass() {
         return String.class;
     }
 
     @Override
-    public final Class<UserName> getValueObjectClass() {
+    public Class<UserName> getValueObjectClass() {
         return UserName.class;
     }
 
     @Override
-    public final boolean isValid(final String value) {
-        return UserNameStrValidator.isValid(value);
+    public boolean canBeConverted(final String value) {
+        return validator.isValid(value);
     }
 
     @Override
-    public final UserName toVO(final String value) {
+    public UserName toVO(final String value) {
         if (value == null) return null;
 
         return new UserName(value);
     }
 
     @Override
-    public final String fromVO(final UserName value) {
+    public String fromVO(final UserName value) {
         if (value == null) return null;
 
         return value.toString();

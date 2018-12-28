@@ -1,10 +1,9 @@
 package br.ufla.lemaf.ti.lemaf4j.vo;
 
-import br.ufla.lemaf.ti.lemaf4j.common.AbstractStringValueObject;
+import br.ufla.lemaf.ti.lemaf4j.AbstractStringValueObject;
 import br.ufla.lemaf.ti.lemaf4j.common.Contract;
 import br.ufla.lemaf.ti.lemaf4j.converters.EmailAddressConverter;
-import br.ufla.lemaf.ti.lemaf4j.types.EmailAddressStr;
-import br.ufla.lemaf.ti.lemaf4j.validators.EmailAddressStrValidator;
+import br.ufla.lemaf.ti.lemaf4j.validators.EmailAddressValidator;
 
 import javax.annotation.concurrent.Immutable;
 import javax.mail.internet.InternetAddress;
@@ -21,13 +20,14 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlJavaTypeAdapter(EmailAddressConverter.class)
 public final class EmailAddress extends AbstractStringValueObject {
 
-    private static final long serialVersionUID = 811127657088134517L;
+    private static final long serialVersionUID = 1L;
 
-    @NotNull
+    private static EmailAddressValidator validator = new EmailAddressValidator();
+
     private InternetAddress email;
 
     /**
-     * Construtor padrão protected para deserialização.
+     * Construtor protected para deserialização.
      */
     protected EmailAddress() {
         super();
@@ -38,20 +38,22 @@ public final class EmailAddress extends AbstractStringValueObject {
      *
      * @param emailAddress Email
      */
-    public EmailAddress(@NotNull @EmailAddressStr final String emailAddress) {
+    public EmailAddress(@NotNull final String emailAddress) {
         super();
         Contract.requireArgNotEmpty("emailAddress", emailAddress);
-        EmailAddressStrValidator.requiredArgValid("emailAddress", emailAddress);
+
+        validator.assertValid("emailAddress", emailAddress);
+
         this.email = EmailAddressConverter.toInternetAddress(emailAddress);
     }
 
     @Override
-    public final String asBaseType() {
+    public String asBaseType() {
         return email.toString();
     }
 
     @Override
-    public final String toString() {
+    public String toString() {
         return asBaseType();
     }
 

@@ -1,10 +1,10 @@
 package br.ufla.lemaf.ti.lemaf4j.converters;
 
-import br.ufla.lemaf.ti.lemaf4j.common.AbstractValueObjectConverter;
+import br.ufla.lemaf.ti.lemaf4j.AbstractValueObjectConverter;
 import br.ufla.lemaf.ti.lemaf4j.common.ConstraintViolationException;
-import br.ufla.lemaf.ti.lemaf4j.common.Error;
-import br.ufla.lemaf.ti.lemaf4j.common.ErrorMessageFactory;
-import br.ufla.lemaf.ti.lemaf4j.validators.EmailAddressStrValidator;
+import br.ufla.lemaf.ti.lemaf4j.utils.Error;
+import br.ufla.lemaf.ti.lemaf4j.utils.ErrorMessageFactory;
+import br.ufla.lemaf.ti.lemaf4j.validators.EmailAddressValidator;
 import br.ufla.lemaf.ti.lemaf4j.vo.EmailAddress;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -22,8 +22,19 @@ import javax.validation.constraints.NotNull;
  */
 @ThreadSafe
 @Converter(autoApply = true)
-public class EmailAddressConverter extends AbstractValueObjectConverter<String, EmailAddress>
+public class EmailAddressConverter
+        extends AbstractValueObjectConverter<String, EmailAddress>
         implements AttributeConverter<EmailAddress, String> {
+
+    private EmailAddressValidator validator;
+
+    /**
+     * Construtor padrão do EmailAddressConverter.
+     * Injeta a dependência de EmailAddressValidador.
+     */
+    public EmailAddressConverter() {
+        this.validator = new EmailAddressValidator();
+    }
 
     @Override
     public Class<String> getBaseTypeClass() {
@@ -36,8 +47,8 @@ public class EmailAddressConverter extends AbstractValueObjectConverter<String, 
     }
 
     @Override
-    public final boolean isValid(final String value) {
-        return EmailAddressStrValidator.isValid(value);
+    public final boolean canBeConverted(final String value) {
+        return validator.isValid(value);
     }
 
     @Override

@@ -1,7 +1,5 @@
 package br.ufla.lemaf.ti.lemaf4j;
 
-import br.ufla.lemaf.ti.lemaf4j.common.ConstraintViolationException;
-
 /**
  * Interface de validação para VOs.
  *
@@ -17,7 +15,8 @@ public interface ValueObjectValidator<B> {
      *
      * @param name O nome do argumento, para mensagem de erro
      * @param value O valor do argumento
-     * @throws ConstraintViolationException Quando o argumento não é válido
+     * @throws br.ufla.lemaf.ti.lemaf4j.common.ConstraintViolationException
+     * Quando o argumento não é válido
      */
     void assertValid(String name, B value);
 

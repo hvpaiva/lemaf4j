@@ -14,7 +14,7 @@ public abstract class AbstractStringValueObject implements
         Comparable<AbstractStringValueObject>,
         Serializable {
 
-    private static final long serialVersionUID = 1000L;
+    private static final long serialVersionUID = 1L;
 
     @Override
     public final int hashCode() {

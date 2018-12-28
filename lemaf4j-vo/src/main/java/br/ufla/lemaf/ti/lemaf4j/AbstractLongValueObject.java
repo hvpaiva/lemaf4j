@@ -14,7 +14,7 @@ public abstract class AbstractLongValueObject implements
         Comparable<AbstractLongValueObject>,
         Serializable {
 
-    private static final long serialVersionUID = 1001L;
+    private static final long serialVersionUID = 1L;
 
     @Override
     public final int hashCode() {

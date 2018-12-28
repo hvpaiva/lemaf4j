@@ -14,7 +14,7 @@ public abstract class AbstractIntegerValueObject implements
         Comparable<AbstractIntegerValueObject>,
         Serializable {
 
-    private static final long serialVersionUID = 1010L;
+    private static final long serialVersionUID = 1L;
 
     @Override
     public final int hashCode() {

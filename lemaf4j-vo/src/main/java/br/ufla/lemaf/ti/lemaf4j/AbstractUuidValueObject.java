@@ -16,7 +16,7 @@ public abstract class AbstractUuidValueObject implements
         Comparable<AbstractUuidValueObject>,
         Serializable {
 
-    private static final long serialVersionUID = 1090L;
+    private static final long serialVersionUID = 1L;
 
     private static final String UUID_PATTERN = "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-\" + \"[0-9a-f]{4}-[0-9a-f]{12}$";
 

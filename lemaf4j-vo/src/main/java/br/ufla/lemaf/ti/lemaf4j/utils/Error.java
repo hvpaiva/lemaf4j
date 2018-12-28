@@ -6,7 +6,7 @@ package br.ufla.lemaf.ti.lemaf4j.utils;
  * @author Highlander Paiva
  * @since 1.0
  */
-public enum Error {
+public enum Error implements ValidationMessage {
     ARGUMENTO_INVALIDO("O argumento '%s' não é válido: '%d'"),
     ARGUMENTO_NULO("O argumento '%s' não pode ser nulo!"),
     ARGUMENTO_VAZIO("O argumento '%s' não pode ser vazio!"),
@@ -17,7 +17,11 @@ public enum Error {
     MULTIPLE_EMAIL("O argumento 'emailAddress' não é um único endereço de email: '%s'"),
     INVALID_EMAIL("O argumento 'emailAddress' não é válido: %s"),
     NAO_FORMATADO("O valor não está propriamente formatado."),
-    INTANCIAR_CLASSE_UTILITARIA("Não se deve criar uma instância de uma classe utilitária!");
+    INTANCIAR_CLASSE_UTILITARIA("Não se deve criar uma instância de uma classe utilitária!"),
+    INVALID_CPF_FORMAT("O CPF não possui formatos válidos!"),
+    INVALID_CPF_DIGITS("O CPF não possui dígitos válidos!"),
+    REPEATED_CPF_DIGITS("Um CPF não pode ser composto de dígitos repetidos!"),
+    INVALID_CPF_CHECK_DIGITS("Os dígitos verificadores do CPF não batem!");
 
     private String message;
 
@@ -36,6 +40,7 @@ public enum Error {
      *
      * @return A mensagem
      */
+    @Override
     public String message() {
         return message;
     }

@@ -3,7 +3,7 @@ package br.ufla.lemaf.ti.lemaf4j.utils;
 import java.util.*;
 
 /**
- * Uma fluent interface para o cálculo de dígitos, que é usado em diversos boletos e
+ * Uma fluent interface para o cálculo de dígitos, que é usado em diversos
  * documentos.
  * Para exemplificar, o dígito do trecho 0000039104766 para os multiplicadores indo de
  * 2 a 7 e usando módulo 11 é a seguinte:
@@ -22,6 +22,7 @@ import java.util.*;
  *
  * @author ceci
  * @author Highlander Paiva
+ * @since 1.0
  */
 public class DigitoPara {
 

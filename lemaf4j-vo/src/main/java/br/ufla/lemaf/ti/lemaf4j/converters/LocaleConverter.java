@@ -1,4 +1,4 @@
-package br.ufla.lemaf.ti.lemaf4j.common;
+package br.ufla.lemaf.ti.lemaf4j.converters;
 
 import javax.annotation.concurrent.ThreadSafe;
 import javax.persistence.AttributeConverter;
@@ -18,29 +18,29 @@ public final class LocaleConverter
         extends XmlAdapter<String, Locale>
         implements AttributeConverter<Locale, String> {
 
+    private static final Integer TOKEN_COUNT_1 = 1;
+    private static final Integer TOKEN_COUNT_2 = 2;
+    private static final Integer TOKEN_COUNT_3 = 3;
+
     @Override
-    public final String marshal(final Locale value) throws Exception {
-        if (value == null) {
-            return null;
-        }
-        return value.toString();
+    public String marshal(final Locale value) throws Exception {
+        return convertToDatabaseColumn(value);
     }
 
     @Override
-    public final Locale unmarshal(final String value) throws Exception {
+    public Locale unmarshal(final String value) throws Exception {
         return asLocale(value);
     }
 
     @Override
-    public final String convertToDatabaseColumn(final Locale value) {
-        if (value == null) {
-            return null;
-        }
+    public String convertToDatabaseColumn(final Locale value) {
+        if (value == null) return null;
+
         return value.toString();
     }
 
     @Override
-    public final Locale convertToEntityAttribute(final String value) {
+    public Locale convertToEntityAttribute(final String value) {
         return asLocale(value);
     }
 
@@ -55,22 +55,30 @@ public final class LocaleConverter
     public static Locale asLocale(final String value) {
         final Locale locale;
         final int p = value.indexOf("__");
+
         if (p > -1) {
+
             locale = new Locale(
                     value.substring(0, p),
                     null,
                     value.substring(p + 2)
             );
+
         } else {
+
             final var tok = new StringTokenizer(value, "_");
-            if (tok.countTokens() == 1) {
+            if (tok.countTokens() == TOKEN_COUNT_1) {
                 locale = new Locale(value);
-            } else if (tok.countTokens() == 2) {
+
+            } else if (tok.countTokens() == TOKEN_COUNT_2) {
                 locale = new Locale(tok.nextToken(), tok.nextToken());
-            } else if (tok.countTokens() == 3) {
+
+            } else if (tok.countTokens() == TOKEN_COUNT_3) {
                 locale = new Locale(tok.nextToken(), tok.nextToken(), tok.nextToken());
+
             } else {
                 throw new IllegalArgumentException("Impossível converter: '" + value + "'");
+
             }
         }
         return locale;

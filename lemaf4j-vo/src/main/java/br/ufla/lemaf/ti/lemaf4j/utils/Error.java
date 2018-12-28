@@ -1,4 +1,4 @@
-package br.ufla.lemaf.ti.lemaf4j.common;
+package br.ufla.lemaf.ti.lemaf4j.utils;
 
 /**
  * Erros comuns da aplicação e suas mensagems.
@@ -15,10 +15,18 @@ public enum Error {
     VALOR_MAX_LENGTH("O valor máximo para o argumento '%s' é %d, mas foi: %f"),
     VALOR_MIN_LENGTH("O valor mínimo para o argumento '%s' é %d, mas foi: %f"),
     MULTIPLE_EMAIL("O argumento 'emailAddress' não é um único endereço de email: '%s'"),
-    INVALID_EMAIL("O argumento 'emailAddress' não é válido: %s");
+    INVALID_EMAIL("O argumento 'emailAddress' não é válido: %s"),
+    NAO_FORMATADO("O valor não está propriamente formatado."),
+    INTANCIAR_CLASSE_UTILITARIA("Não se deve criar uma instância de uma classe utilitária!");
 
     private String message;
 
+    /**
+     * Construtor padrão do
+     * enum de erros.
+     *
+     * @param message A mensagem do erro
+     */
     Error(String message) {
         this.message = message;
     }

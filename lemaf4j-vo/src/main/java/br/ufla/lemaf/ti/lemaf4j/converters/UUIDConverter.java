@@ -1,4 +1,4 @@
-package br.ufla.lemaf.ti.lemaf4j.common;
+package br.ufla.lemaf.ti.lemaf4j.converters;
 
 import javax.annotation.concurrent.ThreadSafe;
 import javax.persistence.AttributeConverter;
@@ -17,31 +17,26 @@ public final class UUIDConverter
         implements AttributeConverter<UUID, String> {
 
     @Override
-    public final String marshal(final UUID value) throws Exception {
-        if (value == null) {
-            return null;
-        }
-        return value.toString();
+    public String marshal(final UUID value) throws Exception {
+        return convertToDatabaseColumn(value);
     }
 
     @Override
-    public final UUID unmarshal(final String value) throws Exception {
-        if (value == null) {
-            return null;
-        }
+    public UUID unmarshal(final String value) throws Exception {
+        if (value == null) return null;
+
         return UUID.fromString(value);
     }
 
     @Override
-    public final String convertToDatabaseColumn(final UUID value) {
-        if (value == null) {
-            return null;
-        }
+    public String convertToDatabaseColumn(final UUID value) {
+        if (value == null) return null;
+
         return value.toString();
     }
 
     @Override
-    public final UUID convertToEntityAttribute(final String value) {
+    public UUID convertToEntityAttribute(final String value) {
         return UUID.fromString(value);
     }
 

@@ -1,29 +1,29 @@
-package br.ufla.lemaf.ti.lemaf4j.common;
+package br.ufla.lemaf.ti.lemaf4j;
 
 /**
- * Converte um Value Object em seu tipo
- * base e vice-versa.
+ * Interface de conversão entre o tipo do
+ * Value Object e seu tipo básico.
  *
- * @param <BASE_TYPE> O tipo básico
- * @param <VO_TYPE> O tipo concreto do VO
+ * @param <B> O tipo básico
+ * @param <V> O tipo concreto do VO
  * @author Highlander Paiva
  * @since 1.0
  */
-public interface ValueObjectConverter<BASE_TYPE, VO_TYPE extends ValueObjectWithBaseType<BASE_TYPE>> {
+interface ValueObjectConverter<B, V extends ValueObjectWithBaseType<B>> {
 
     /**
      * Retorna a classe do tipo que será convertido.
      *
      * @return Tipo do outro objeto
      */
-    Class<BASE_TYPE> getBaseTypeClass();
+    Class<B> getBaseTypeClass();
 
     /**
      * Retorna a classe concreta do value object.
      *
      * @return O tipo do Value Object
      */
-    Class<VO_TYPE> getValueObjectClass();
+    Class<V> getValueObjectClass();
 
     /**
      * Verifica se o valor dado pode ser convertido em um
@@ -32,9 +32,9 @@ public interface ValueObjectConverter<BASE_TYPE, VO_TYPE extends ValueObjectWith
      *
      * @param value Valor a se checar
      * @return <code>true</code> se o valor pode ser convertido,
-     *         senão <code>false</code>
+     * senão <code>false</code>
      */
-    boolean isValid(BASE_TYPE value);
+    boolean canBeConverted(B value);
 
     /**
      * Converte um tipo básico em um Value Object.
@@ -44,7 +44,7 @@ public interface ValueObjectConverter<BASE_TYPE, VO_TYPE extends ValueObjectWith
      * @param value A representação do VO como tipo básico
      * @return O value object
      */
-    VO_TYPE toVO(BASE_TYPE value);
+    V toVO(B value);
 
     /**
      * Converte um Value Object em tipo básico.
@@ -52,8 +52,8 @@ public interface ValueObjectConverter<BASE_TYPE, VO_TYPE extends ValueObjectWith
      * <code>null</code>.
      *
      * @param value O value object
-     * @return  A representação do VO como tipo básico
+     * @return A representação do VO como tipo básico
      */
-    BASE_TYPE fromVO(VO_TYPE value);
+    B fromVO(V value);
 
 }

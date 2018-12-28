@@ -1,4 +1,4 @@
-package br.ufla.lemaf.ti.lemaf4j.common;
+package br.ufla.lemaf.ti.lemaf4j.utils;
 
 /**
  * Classe utilitária para construir
@@ -9,9 +9,13 @@ package br.ufla.lemaf.ti.lemaf4j.common;
  */
 public final class ErrorMessageFactory {
 
+    /**
+     * Construtor privado para
+     * evitar instanciação.
+     */
     private ErrorMessageFactory() {
         throw new UnsupportedOperationException(
-                "Não se deve criar uma instância de uma classe utilitária!"
+                Error.INTANCIAR_CLASSE_UTILITARIA.message()
         );
     }
 
@@ -20,10 +24,10 @@ public final class ErrorMessageFactory {
      * Formatando o texto da mensagem com seus argumentos.
      *
      * @param error O tipo do erro
-     * @param args Os argumentos do erro
+     * @param args  Os argumentos do erro
      * @return Uma String formatada com a mensagem de erros
      */
-    public static String of(Error error, Object ...args) {
+    public static String of(Error error, Object... args) {
         return String.format(error.message(), args);
     }
 

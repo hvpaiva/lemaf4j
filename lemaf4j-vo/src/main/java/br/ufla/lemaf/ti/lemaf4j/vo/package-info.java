@@ -1,6 +1,7 @@
 /**
- * Contém objetos imutáveis que representam Value Objects, ou seja,
- * objetos cuja sua igualdade não são baseadas em suas igualdades.
+ * Pacote com as VO mais comuns.
+ * Contém Value Objects que são objetos imutáveis cuja sua
+ * igualdade não são baseadas na igualdade de seus valores.
  * Isto significa que as instâncias deste tipo são iguais quando seus valores
  * são o mesmo, não necessariamente sendo os mesmos objetos.
  */
@@ -11,8 +12,8 @@
 })
 package br.ufla.lemaf.ti.lemaf4j.vo;
 
-import br.ufla.lemaf.ti.lemaf4j.common.LocaleConverter;
-import br.ufla.lemaf.ti.lemaf4j.common.UUIDConverter;
+import br.ufla.lemaf.ti.lemaf4j.converters.LocaleConverter;
+import br.ufla.lemaf.ti.lemaf4j.converters.UUIDConverter;
 
 import javax.enterprise.inject.Vetoed;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;

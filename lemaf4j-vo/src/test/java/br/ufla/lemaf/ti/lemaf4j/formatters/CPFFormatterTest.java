@@ -53,6 +53,8 @@ public class CPFFormatterTest {
         formatterToTest.format(null);
         formatterToTest.format("123456789012345");
         formatterToTest.format("123456789");
+        formatterToTest.unformat("aaa.aaa.aaa-aa");
+        formatterToTest.unformat("aaaaaaaaaaa");
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -61,6 +63,9 @@ public class CPFFormatterTest {
         formatterToTest.unformat(null);
         formatterToTest.unformat("123456789012345");
         formatterToTest.unformat("123456789");
+        formatterToTest.unformat("aaa.aaa.aaa-aa");
+        formatterToTest.unformat("aaaaaaaaaaa");
+
     }
 
     @Test
@@ -72,7 +77,7 @@ public class CPFFormatterTest {
     }
 
     @Test
-    public void shouldUnormatNonObviousInvalidsCPF() {
+    public void shouldUnformatNonObviousInvalidsCPF() {
         formatterToTest.unformat("00000000000");
         formatterToTest.unformat("000.000.000-00");
         formatterToTest.unformat("12345678912");
@@ -82,6 +87,7 @@ public class CPFFormatterTest {
     @Test
     public void shouldDetectIfAValueIsFormattedOrNot() {
         assertTrue(formatterToTest.isFormatted("111.222.333-44"));
+        assertFalse(formatterToTest.isFormatted("aaa.aaa.aaa-aa"));
         assertFalse(formatterToTest.isFormatted("11122233344"));
         assertFalse(formatterToTest.isFormatted("1.1a1.1-2"));
     }
@@ -89,6 +95,7 @@ public class CPFFormatterTest {
     @Test
     public void shouldDetectIfAValueCanBeFormattedOrNot() {
         assertTrue(formatterToTest.canBeFormatted("11122233344"));
+        assertFalse(formatterToTest.canBeFormatted("aaaaaaaaaaa"));
         assertFalse(formatterToTest.canBeFormatted("111.222.333-44"));
         assertFalse(formatterToTest.canBeFormatted("1.1a1.1-2"));
     }

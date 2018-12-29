@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dependencies>
+    <!-- Project dependency definition for use with AssertDependencies -->
+
+    <!-- All classes are allowed to use this -->
+    <alwaysAllowed>
+        <dependsOn package="java.io"/>
+        <dependsOn package="java.lang"/>
+        <dependsOn package="java.math"/>
+        <dependsOn package="java.security"/>
+        <dependsOn package="java.text"/>
+        <dependsOn package="java.util"/>
+        <dependsOn package="javax.annotation"/>
+        <dependsOn package="javax.annotation.concurrent"/>
+        <dependsOn package="javax.validation"/>
+        <dependsOn package="javax.persistence"/>
+        <dependsOn package="javax.enterprise.context"/>
+        <dependsOn package="javax.enterprise.inject" />
+        <dependsOn package="javax.xml.bind"/>
+        <dependsOn package="org.joda.time"/>
+    </alwaysAllowed>
+
+    <!-- It's forbidden for all classes to use this (in production code) -->
+    <alwaysForbidden>
+        <notDependsOn package="org.fuin.utils4j" comment="Minimization of dependencies"/>
+    </alwaysForbidden>
+
+    <!-- Packages are ONLY allowed to use the following packages (all other packages are forbidden) -->
+    <allowed>
+        <package name="br.ufla.lemaf.ti.lemaf4j" comment="No access to other packages"/>
+        <package name="br.ufla.lemaf.ti.lemaf4j.common" comment="No access to other packages"/>
+        <package name="br.ufla.lemaf.ti.lemaf4j.utils" comment="No access to other packages"/>
+        <package name="br.ufla.lemaf.ti.lemaf4j.vo">
+            <dependsOn package="br.ufla.lemaf.ti.lemaf4j.common"/>
+            <dependsOn package="br.ufla.lemaf.ti.lemaf4j.utils"/>
+            <dependsOn package="javax.mail.internet"/>
+        </package>
+        <package name="br.ufla.lemaf.ti.lemaf4j.converters">
+            <dependsOn package="br.ufla.lemaf.ti.lemaf4j"/>
+            <dependsOn package="br.ufla.lemaf.ti.lemaf4j.vo"/>
+            <dependsOn package="br.ufla.lemaf.ti.lemaf4j.validators"/>
+            <dependsOn package="br.ufla.lemaf.ti.lemaf4j.common"/>
+            <dependsOn package="br.ufla.lemaf.ti.lemaf4j.utils"/>
+            <dependsOn package="javax.mail.internet"/>
+        </package>
+        <package name="br.ufla.lemaf.ti.lemaf4j.validators">
+            <dependsOn package="br.ufla.lemaf.ti.lemaf4j"/>
+            <dependsOn package="br.ufla.lemaf.ti.lemaf4j.formatters"/>
+            <dependsOn package="br.ufla.lemaf.ti.lemaf4j.common"/>
+            <dependsOn package="br.ufla.lemaf.ti.lemaf4j.utils"/>
+        </package>
+        <package name="br.ufla.lemaf.ti.lemaf4j.formatters">
+            <dependsOn package="br.ufla.lemaf.ti.lemaf4j"/>
+            <dependsOn package="br.ufla.lemaf.ti.lemaf4j.common"/>
+            <dependsOn package="br.ufla.lemaf.ti.lemaf4j.utils"/>
+        </package>
+    </allowed>
+
+    <!-- Packages are NOT allowed to use the following ones (all other packages are allowed) -->
+    <forbidden/>
+
+</dependencies>

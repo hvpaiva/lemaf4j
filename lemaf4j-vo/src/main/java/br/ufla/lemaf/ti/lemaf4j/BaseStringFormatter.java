@@ -50,6 +50,8 @@ public class BaseStringFormatter implements Formatter<String> {
         String result;
         assetNotNull(value);
 
+        if (isFormatted(value)) return value;
+
         Matcher matcher = unformatted.matcher(value);
         result = matchAndReplace(matcher, formattedReplacement);
 
@@ -60,6 +62,8 @@ public class BaseStringFormatter implements Formatter<String> {
     public String unformat(String value) {
         String result;
         assetNotNull(value);
+
+        if (canBeFormatted(value)) return value;
 
         Matcher unformattedMatcher = unformatted.matcher(value);
         if (unformattedMatcher.matches()) return value;

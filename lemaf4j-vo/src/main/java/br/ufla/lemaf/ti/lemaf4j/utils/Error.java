@@ -7,13 +7,13 @@ package br.ufla.lemaf.ti.lemaf4j.utils;
  * @since 1.0
  */
 public enum Error implements ValidationMessage {
-    ARGUMENTO_INVALIDO("O argumento '%s' não é válido: '%d'"),
+    ARGUMENTO_INVALIDO("O argumento '%s' não é válido: '%s'"),
     ARGUMENTO_NULO("O argumento '%s' não pode ser nulo!"),
     ARGUMENTO_VAZIO("O argumento '%s' não pode ser vazio!"),
-    ARGUMENTO_MAX_LENGTH("O tamanho máximo para o argumento '%s' é %d, mas foi: %f"),
-    ARGUMENTO_MIN_LENGTH("O tamanho mínimo para o argumento '%s' é %d, mas foi: %f"),
-    VALOR_MAX_LENGTH("O valor máximo para o argumento '%s' é %d, mas foi: %f"),
-    VALOR_MIN_LENGTH("O valor mínimo para o argumento '%s' é %d, mas foi: %f"),
+    ARGUMENTO_MAX_LENGTH("O tamanho máximo para o argumento '%s' é %s, mas foi: %s"),
+    ARGUMENTO_MIN_LENGTH("O tamanho mínimo para o argumento '%s' é %s, mas foi: %s"),
+    VALOR_MAX_LENGTH("O valor máximo para o argumento '%s' é %s, mas foi: %s"),
+    VALOR_MIN_LENGTH("O valor mínimo para o argumento '%s' é %s, mas foi: %s"),
     MULTIPLE_EMAIL("O argumento 'emailAddress' não é um único endereço de email: '%s'"),
     INVALID_EMAIL("O argumento 'emailAddress' não é válido: %s"),
     NAO_FORMATADO("O valor não está propriamente formatado."),

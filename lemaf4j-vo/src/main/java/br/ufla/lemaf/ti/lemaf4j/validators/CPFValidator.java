@@ -22,7 +22,8 @@ public final class CPFValidator implements ValueObjectValidator<String> {
 
     private static CPFFormatter formatter = new CPFFormatter();
 
-    private static final Integer CPF_MAX_LENGTH_UNFORMATTED = 11;
+    private static final Integer CPF_LENGTH_UNFORMATTED = 11;
+    private static final Integer CPF_LENGTH_FORMATTED = 14;
 
     @Override
     public void assertValid(@NotNull final String name,
@@ -31,6 +32,16 @@ public final class CPFValidator implements ValueObjectValidator<String> {
             throw new ConstraintViolationException(
                     ErrorMessageFactory.of(Error.ARGUMENTO_INVALIDO, name, valor)
             );
+    }
+
+    /**
+     * Confere so o valor do CPF é válido, lançando exceção
+     * {@link ConstraintViolationException} se não for.
+     *
+     * @param valor O valor a se validar
+     */
+    public void assertValid(@NotNull final String valor) {
+        assertValid("CPF", valor);
     }
 
     @Override
@@ -45,50 +56,59 @@ public final class CPFValidator implements ValueObjectValidator<String> {
      * @return Uma lista de erros de CPF
      */
     public List<ValidationMessage> invalidMessagesFor(String cpf) {
-        if (cpf == null) throw new IllegalArgumentException(
-                Error.ARGUMENTO_NULO.message()
-        );
-
         List<ValidationMessage> errors = new ArrayList<>();
+        if (cpf == null
+                || cpf.isEmpty()
+                || cpf.length() < CPF_LENGTH_UNFORMATTED
+                || cpf.length() > CPF_LENGTH_FORMATTED) {
+            errors.add(
+                Error.ARGUMENTO_INVALIDO
+            );
 
-        if (!formatter.isFormatted(cpf) || !formatter.canBeFormatted(cpf))
-            errors.add(Error.INVALID_CPF_FORMAT);
+        } else {
 
-        String unformattedCPF;
-        try {
-            if (formatter.isFormatted(cpf)) {
 
-                unformattedCPF = formatter.unformat(cpf);
+            if (!formatter.isFormatted(cpf) && !formatter.canBeFormatted(cpf))
+                errors.add(Error.INVALID_CPF_FORMAT);
 
-            } else {
+            String unformattedCPF;
+            try {
+                if (formatter.isFormatted(cpf)) {
 
-                unformattedCPF = cpf;
+                    unformattedCPF = formatter.unformat(cpf);
+
+                } else {
+
+                    unformattedCPF = cpf;
+
+                }
+
+            } catch (IllegalArgumentException e) {
+
+                errors.add(Error.INVALID_CPF_DIGITS);
+                return errors;
 
             }
 
-        } catch (IllegalArgumentException e) {
+            if (unformattedCPF.length() != CPF_LENGTH_UNFORMATTED
+                    || !unformattedCPF.matches("[0-9]*"))
+                errors.add(Error.INVALID_CPF_DIGITS);
 
-            errors.add(Error.INVALID_CPF_DIGITS);
-            return errors;
+            if (hasAllRepeatedDigits(unformattedCPF))
+                errors.add(Error.REPEATED_CPF_DIGITS);
+
+            var cpfSemDigito = unformattedCPF.substring(0, unformattedCPF.length() - 2);
+            var digitos = unformattedCPF.substring(unformattedCPF.length() - 2);
+
+            var digitosCalculados = calculaDigitos(cpfSemDigito);
+
+            if (!digitos.equals(digitosCalculados))
+                errors.add(Error.INVALID_CPF_CHECK_DIGITS);
 
         }
 
-        if (unformattedCPF.length() != CPF_MAX_LENGTH_UNFORMATTED
-                || !unformattedCPF.matches("[0-9]*"))
-            errors.add(Error.INVALID_CPF_DIGITS);
-
-        if (hasAllRepeatedDigits(unformattedCPF))
-            errors.add(Error.REPEATED_CPF_DIGITS);
-
-        var cpfSemDigito = unformattedCPF.substring(0, unformattedCPF.length() - 2);
-        var digitos = unformattedCPF.substring(unformattedCPF.length() - 2);
-
-        var digitosCalculados = calculaDigitos(cpfSemDigito);
-
-        if (!digitos.equals(digitosCalculados))
-            errors.add(Error.INVALID_CPF_CHECK_DIGITS);
-
         return errors;
+
     }
 
     private static final Integer MULTIPLICADOR_INICIAL_DIGITO_CPF = 2;
@@ -134,10 +154,11 @@ public final class CPFValidator implements ValueObjectValidator<String> {
      * forem repetidos
      */
     private boolean hasAllRepeatedDigits(String cpf) {
-        return cpf
-                .chars()
-                .anyMatch(charCPF ->
-                        cpf.charAt(charCPF) != cpf.charAt(0)
-                );
+        for (int i = 1; i < cpf.length(); i++) {
+            if (cpf.charAt(i) != cpf.charAt(0)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

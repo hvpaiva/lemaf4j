@@ -11,29 +11,22 @@ e abstrações lógicas comuns e documentadas.
 Módulo de Value Objects, contem implementações e utilitários comuns 
 de VOs:
 
-#### Packages:
-
-- vo: Package contendo as classes VOs em si
-- types: Annotations dos VOs para anotar e validar o modelo
-- validations: Classes com validadores dos VOs
-- converters: Conversores dos VOs para seus tipos básicos
-- formatters: Formata/Desformata os VOs que possuem formatação padrão
-- common: Package contendo utilitários para a biblioteca
+[Mais informações](http://gitlab.ti.lemaf.ufla.br/devops/lemaf4j/tree/master/lemaf4j-vo#lemaf4j-vo)
 
 ### LEMAF4J-DDD
 
 Módulo com implementações básicas para aplicar o Domain Driven Design.
 
-*WIP*
+*TODO*
 
 ### LEMAF4J-UTILS
 
 Módulo com utilitários gerais padrões.
 
-*WIP*
+*TODO*
 
 ### LEMAF4J-UNIT
 
 Módulo contendo classes utilitárias para testes unitários.
 
-*WIP*
+*TODO*

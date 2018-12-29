@@ -1,16 +1,17 @@
 package br.ufla.lemaf.ti.lemaf4j.common;
 
+import br.ufla.lemaf.ti.lemaf4j.utils.ErrorMessageFactory;
+
 import javax.annotation.Nullable;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.constraints.NotNull;
-import javax.validation.groups.Default;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static br.ufla.lemaf.ti.lemaf4j.common.Error.*;
+import static br.ufla.lemaf.ti.lemaf4j.utils.Error.*;
 
 /**
  * Classe utilitária para asserções em
@@ -56,7 +57,7 @@ public final class Contract {
      */
     private Contract() {
         throw new UnsupportedOperationException(
-                "Não se deve criar uma instância de uma classe utilitária!"
+                INTANCIAR_CLASSE_UTILITARIA.message()
         );
     }
 
@@ -183,7 +184,7 @@ public final class Contract {
      * @param validator Validator a se usar
      * @param value     Valor a se checar
      * @param groups    Grupo ou lista de grupos alvos para validação
-     *                  (o padrão é {@link Default})
+     *                  (o padrão é {@link javax.validation.groups.Default})
      * @throws ConstraintViolationException O valor é inválido
      */
     public static void requireValid(@NotNull final Validator validator,
@@ -213,7 +214,7 @@ public final class Contract {
      *
      * @param value  Valor a se checar
      * @param groups Grupo ou lista de grupos alvos para validação
-     *               (o padrão é {@link Default})
+     *               (o padrão é {@link javax.validation.groups.Default})
      * @throws ConstraintViolationException O valor é inválido
      */
     public static void requireValid(@NotNull final Object value,
@@ -227,7 +228,7 @@ public final class Contract {
      * @param validator Validator a se usar
      * @param value     Valor a se validar
      * @param groups    Grupo ou lista de grupos alvos para validação
-     *                  (o padrão é {@link Default})
+     *                  (o padrão é {@link javax.validation.groups.Default})
      * @param <TYPE>    Tipo do objeto validado
      * @return Lista de constraint violations
      */
@@ -246,7 +247,7 @@ public final class Contract {
      *
      * @param value     Valor a se validar
      * @param groups    Grupo ou lista de grupos alvos para validação
-     *                  (o padrão é {@link Default})
+     *                  (o padrão é {@link javax.validation.groups.Default})
      * @param <TYPE>    Tipo do objeto validado
      * @return Lista de constraint violations
      */

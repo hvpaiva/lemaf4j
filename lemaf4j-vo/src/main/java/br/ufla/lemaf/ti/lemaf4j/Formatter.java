@@ -34,7 +34,8 @@ public interface Formatter<B> {
     B unformat(B value);
 
     /**
-     * Verifica se uma cadeia está no formato com o qual o formatador trabalha.
+     * Verifica se uma cadeia está no formato
+     * com o qual o formatador trabalha, formatado.
      *
      * @param value Valor a ser verificado
      * @return <code>true</code>, se estiver de acordo com o formato
@@ -42,11 +43,13 @@ public interface Formatter<B> {
     boolean isFormatted(B value);
 
     /**
-     * Verifica se uma cadeia pode ser formatada por esse formatador.
+     * Verifica se uma cadeia está no formato
+     * com o qual o formatador trabalha, mas
+     * desformatado.
      *
      * @param value Valor a ser verificado
-     * @return <code>true</code>, se este formatador pode formatar a cadeia dada
+     * @return <code>true</code>, se estiver de acordo com o formato
      */
-    boolean canBeFormatted(B value);
+    boolean isNotFormatted(B value);
 
 }

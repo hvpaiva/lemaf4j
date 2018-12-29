@@ -2,6 +2,7 @@ package br.ufla.lemaf.ti.lemaf4j.formatters;
 
 import br.ufla.lemaf.ti.lemaf4j.BaseStringFormatter;
 import br.ufla.lemaf.ti.lemaf4j.Formatter;
+import br.ufla.lemaf.ti.lemaf4j.validators.CPFValidator;
 
 import java.util.regex.Pattern;
 
@@ -47,7 +48,7 @@ public class CPFFormatter implements Formatter<String> {
     }
 
     @Override
-    public boolean canBeFormatted(String value) {
-        return base.canBeFormatted(value);
+    public boolean isNotFormatted(String value) {
+        return base.isNotFormatted(value);
     }
 }

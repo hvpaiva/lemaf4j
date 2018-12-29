@@ -1,7 +1,5 @@
 package br.ufla.lemaf.ti.lemaf4j.formatters;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -93,10 +91,10 @@ public class CPFFormatterTest {
     }
 
     @Test
-    public void shouldDetectIfAValueCanBeFormattedOrNot() {
-        assertTrue(formatterToTest.canBeFormatted("11122233344"));
-        assertFalse(formatterToTest.canBeFormatted("aaaaaaaaaaa"));
-        assertFalse(formatterToTest.canBeFormatted("111.222.333-44"));
-        assertFalse(formatterToTest.canBeFormatted("1.1a1.1-2"));
+    public void shouldDetectIfAValueisNotFormattedOrNot() {
+        assertTrue(formatterToTest.isNotFormatted("11122233344"));
+        assertFalse(formatterToTest.isNotFormatted("aaaaaaaaaaa"));
+        assertFalse(formatterToTest.isNotFormatted("111.222.333-44"));
+        assertFalse(formatterToTest.isNotFormatted("1.1a1.1-2"));
     }
 }

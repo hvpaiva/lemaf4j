@@ -63,7 +63,7 @@ public class BaseStringFormatter implements Formatter<String> {
         String result;
         assetNotNull(value);
 
-        if (canBeFormatted(value)) return value;
+        if (isNotFormatted(value)) return value;
 
         Matcher unformattedMatcher = unformatted.matcher(value);
         if (unformattedMatcher.matches()) return value;
@@ -80,7 +80,7 @@ public class BaseStringFormatter implements Formatter<String> {
     }
 
     @Override
-    public boolean canBeFormatted(String value) {
+    public boolean isNotFormatted(String value) {
         return unformatted.matcher(value).matches();
     }
 

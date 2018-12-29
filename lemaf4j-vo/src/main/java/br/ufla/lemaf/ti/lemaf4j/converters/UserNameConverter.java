@@ -30,21 +30,33 @@ public final class UserNameConverter
         this.validator = new UserNameValidator();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Class<String> getBaseTypeClass() {
         return String.class;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Class<UserName> getValueObjectClass() {
         return UserName.class;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean canBeConverted(final String value) {
         return validator.isValid(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UserName toVO(final String value) {
         if (value == null) return null;
@@ -52,6 +64,9 @@ public final class UserNameConverter
         return new UserName(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String fromVO(final UserName value) {
         if (value == null) return null;

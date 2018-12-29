@@ -50,11 +50,17 @@ public final class UserName extends AbstractStringValueObject {
         this.str = userName.trim().toLowerCase();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String asBaseType() {
         return str;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return asBaseType();

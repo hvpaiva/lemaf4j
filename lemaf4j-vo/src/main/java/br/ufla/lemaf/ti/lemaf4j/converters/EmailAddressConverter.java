@@ -36,21 +36,33 @@ public class EmailAddressConverter
         this.validator = new EmailAddressValidator();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Class<String> getBaseTypeClass() {
         return String.class;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final Class<EmailAddress> getValueObjectClass() {
         return EmailAddress.class;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final boolean canBeConverted(final String value) {
         return validator.isValid(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final EmailAddress toVO(final String value) {
         if (value == null) return null;
@@ -58,6 +70,9 @@ public class EmailAddressConverter
         return new EmailAddress(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final String fromVO(final EmailAddress value) {
         if (value == null) return null;

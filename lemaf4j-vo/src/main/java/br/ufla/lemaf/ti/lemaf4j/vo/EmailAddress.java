@@ -47,11 +47,17 @@ public final class EmailAddress extends AbstractStringValueObject {
         this.email = EmailAddressConverter.toInternetAddress(emailAddress);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String asBaseType() {
         return email.toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return asBaseType();

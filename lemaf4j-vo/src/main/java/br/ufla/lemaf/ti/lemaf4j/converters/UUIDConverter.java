@@ -16,11 +16,17 @@ public final class UUIDConverter
         extends XmlAdapter<String, UUID>
         implements AttributeConverter<UUID, String> {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String marshal(final UUID value) throws Exception {
         return convertToDatabaseColumn(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UUID unmarshal(final String value) throws Exception {
         if (value == null) return null;
@@ -28,6 +34,9 @@ public final class UUIDConverter
         return UUID.fromString(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String convertToDatabaseColumn(final UUID value) {
         if (value == null) return null;
@@ -35,6 +44,9 @@ public final class UUIDConverter
         return value.toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UUID convertToEntityAttribute(final String value) {
         return UUID.fromString(value);

@@ -15,21 +15,33 @@ public abstract class AbstractValueObjectConverter
         extends XmlAdapter<B, V>
         implements AttributeConverter<V, B>, ValueObjectConverter<B, V> {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final B marshal(final V value) throws Exception {
         return fromVO(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final V unmarshal(final B value) throws Exception {
         return toVO(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final B convertToDatabaseColumn(final V value) {
         return fromVO(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final V convertToEntityAttribute(final B value) {
         return toVO(value);

@@ -45,6 +45,9 @@ public class BaseStringFormatter implements Formatter<String> {
         this.unformattedReplacement = unformattedReplacement;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String format(String value) {
         String result;
@@ -58,6 +61,9 @@ public class BaseStringFormatter implements Formatter<String> {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String unformat(String value) {
         String result;
@@ -74,11 +80,17 @@ public class BaseStringFormatter implements Formatter<String> {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isFormatted(String value) {
         return formatted.matcher(value).matches();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isNotFormatted(String value) {
         return unformatted.matcher(value).matches();

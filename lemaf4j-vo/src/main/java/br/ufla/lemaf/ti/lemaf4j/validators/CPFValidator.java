@@ -25,6 +25,9 @@ public final class CPFValidator implements ValueObjectValidator<String> {
     private static final Integer CPF_LENGTH_UNFORMATTED = 11;
     private static final Integer CPF_LENGTH_FORMATTED = 14;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void assertValid(@NotNull final String name,
                             @NotNull final String valor) {
@@ -44,6 +47,9 @@ public final class CPFValidator implements ValueObjectValidator<String> {
         assertValid("CPF", valor);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isValid(final String valor) {
         return invalidMessagesFor(valor).isEmpty();

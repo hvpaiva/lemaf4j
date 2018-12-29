@@ -22,16 +22,25 @@ public final class LocaleConverter
     private static final Integer TOKEN_COUNT_2 = 2;
     private static final Integer TOKEN_COUNT_3 = 3;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String marshal(final Locale value) throws Exception {
         return convertToDatabaseColumn(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Locale unmarshal(final String value) throws Exception {
         return asLocale(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String convertToDatabaseColumn(final Locale value) {
         if (value == null) return null;
@@ -39,6 +48,9 @@ public final class LocaleConverter
         return value.toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Locale convertToEntityAttribute(final String value) {
         return asLocale(value);

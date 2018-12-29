@@ -16,11 +16,17 @@ public abstract class AbstractIntegerValueObject implements
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final int hashCode() {
         return asBaseType().hashCode();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final boolean equals(final Object obj) {
         if (this == obj) return true;
@@ -30,11 +36,17 @@ public abstract class AbstractIntegerValueObject implements
         return asBaseType().equals(other.asBaseType());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final int compareTo(final AbstractIntegerValueObject other) {
         return asBaseType().compareTo(other.asBaseType());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final Class<Integer> getBaseType() {
         return Integer.class;

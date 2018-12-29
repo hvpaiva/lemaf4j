@@ -30,21 +30,33 @@ public class CPFConverter
         this.validator = new CPFValidator();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Class<String> getBaseTypeClass() {
         return String.class;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final Class<CPF> getValueObjectClass() {
         return CPF.class;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final boolean canBeConverted(final String value) {
         return validator.isValid(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final CPF toVO(final String value) {
         if (value == null) return null;
@@ -52,6 +64,9 @@ public class CPFConverter
         return new CPF(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final String fromVO(final CPF value) {
         if (value == null) return null;

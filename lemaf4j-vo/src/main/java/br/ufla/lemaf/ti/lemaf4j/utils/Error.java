@@ -35,10 +35,9 @@ public enum Error implements ValidationMessage {
         this.message = message;
     }
 
+
     /**
-     * Retorna a mensagem do erro.
-     *
-     * @return A mensagem
+     * {@inheritDoc}
      */
     @Override
     public String message() {

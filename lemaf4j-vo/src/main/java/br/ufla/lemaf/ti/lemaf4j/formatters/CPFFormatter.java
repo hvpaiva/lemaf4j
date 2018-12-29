@@ -32,21 +32,33 @@ public class CPFFormatter implements Formatter<String> {
         );
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String format(String value) {
         return base.format(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String unformat(String value) {
         return base.unformat(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isFormatted(String value) {
         return base.isFormatted(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isNotFormatted(String value) {
         return base.isNotFormatted(value);

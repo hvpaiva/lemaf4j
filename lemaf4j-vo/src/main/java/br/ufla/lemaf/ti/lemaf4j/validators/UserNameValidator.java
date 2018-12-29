@@ -28,6 +28,9 @@ public final class UserNameValidator implements ValueObjectValidator<String> {
 
     private static final Pattern PATTERN = Pattern.compile("[a-z][0-9a-z_\\-]*");
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isValid(final String value) {
         if ((value == null)
@@ -38,6 +41,9 @@ public final class UserNameValidator implements ValueObjectValidator<String> {
         return PATTERN.matcher(value).matches();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void assertValid(@NotNull final String name,
                             @NotNull final String value) {

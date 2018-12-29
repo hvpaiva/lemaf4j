@@ -17,6 +17,9 @@ import javax.validation.constraints.NotNull;
  */
 public final class EmailAddressValidator implements ValueObjectValidator<String> {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void assertValid(@NotNull final String name,
                             @NotNull final String value) {
@@ -28,6 +31,9 @@ public final class EmailAddressValidator implements ValueObjectValidator<String>
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isValid(final String value) {
         if (value == null || value.isEmpty()) return false;

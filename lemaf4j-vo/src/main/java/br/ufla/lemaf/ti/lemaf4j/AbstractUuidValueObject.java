@@ -20,11 +20,17 @@ public abstract class AbstractUuidValueObject implements
 
     private static final String UUID_PATTERN = "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-\" + \"[0-9a-f]{4}-[0-9a-f]{12}$";
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final int hashCode() {
         return asBaseType().hashCode();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final boolean equals(final Object obj) {
         if (this == obj) return true;
@@ -34,11 +40,17 @@ public abstract class AbstractUuidValueObject implements
         return asBaseType().equals(other.asBaseType());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final int compareTo(final AbstractUuidValueObject other) {
         return asBaseType().compareTo(other.asBaseType());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final Class<UUID> getBaseType() {
         return UUID.class;

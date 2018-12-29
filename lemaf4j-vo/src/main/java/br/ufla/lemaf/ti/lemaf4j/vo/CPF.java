@@ -55,21 +55,33 @@ public final class CPF extends AbstractStringValueObject implements Formattable<
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String unformatted() {
         return asBaseType();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String formatted() {
         return formatter.format(codigo);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String asBaseType() {
         return codigo;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return asBaseType();

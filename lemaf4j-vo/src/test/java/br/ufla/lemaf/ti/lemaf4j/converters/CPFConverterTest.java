@@ -41,6 +41,20 @@ public class CPFConverterTest {
     }
 
     @Test
+    public final void shouldTestConvertToDatabaseColumn() {
+        assertThat(converterToTest.convertToDatabaseColumn(new CPF("114.582.016-60"))).isEqualTo("11458201660");
+        assertThat(converterToTest.convertToDatabaseColumn(new CPF("11458201660"))).isEqualTo("11458201660");
+    }
+
+    @Test
+    public final void shouldTestConvertToEntityAttribute() {
+        assertThat(converterToTest.convertToEntityAttribute("114.582.016-60")).isEqualTo(new CPF("114.582.016-60"));
+        assertThat(converterToTest.convertToEntityAttribute("11458201660")).isEqualTo(new CPF("114.582.016-60"));
+        assertThat(converterToTest.convertToEntityAttribute("11458201660")).isEqualTo(new CPF("11458201660"));
+        assertThat(converterToTest.convertToEntityAttribute("114.582.016-60")).isEqualTo(new CPF("11458201660"));
+    }
+
+    @Test
     public final void shouldTestIsValid() {
         assertThat(converterToTest.canBeConverted("114.582.016-60")).isTrue();
         assertThat(converterToTest.canBeConverted("11458201660")).isTrue();

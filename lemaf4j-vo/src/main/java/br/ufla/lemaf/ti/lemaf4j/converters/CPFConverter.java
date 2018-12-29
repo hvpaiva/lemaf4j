@@ -17,8 +17,7 @@ import javax.persistence.Converter;
 @ThreadSafe
 @Converter(autoApply = true)
 public class CPFConverter
-        extends AbstractValueObjectConverter<String, CPF>
-        implements AttributeConverter<CPF, String> {
+        extends AbstractValueObjectConverter<String, CPF> {
 
     private CPFValidator validator;
 

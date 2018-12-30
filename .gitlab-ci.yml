@@ -19,7 +19,7 @@ test:
   script:
     - mvn $MAVEN_CLI_OPTS verify jacoco:report
     - awk $CODE_COVERED_OPTS lemaf4j-vo/target/site/jacoco/jacoco.csv
-  coverage: '/(\d+.\d+\%\) covered/'
+  coverage: '/\(\d+.\d+\%\) covered/'
 
 #deploy:
 #  stage: deploy

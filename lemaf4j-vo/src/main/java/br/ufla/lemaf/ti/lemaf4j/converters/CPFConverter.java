@@ -5,7 +5,6 @@ import br.ufla.lemaf.ti.lemaf4j.validators.CPFValidator;
 import br.ufla.lemaf.ti.lemaf4j.vo.CPF;
 
 import javax.annotation.concurrent.ThreadSafe;
-import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 /**

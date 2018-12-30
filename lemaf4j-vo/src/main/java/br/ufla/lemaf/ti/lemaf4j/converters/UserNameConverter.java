@@ -5,7 +5,6 @@ import br.ufla.lemaf.ti.lemaf4j.AbstractValueObjectConverter;
 import br.ufla.lemaf.ti.lemaf4j.vo.UserName;
 
 import javax.annotation.concurrent.ThreadSafe;
-import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 /**
@@ -17,8 +16,7 @@ import javax.persistence.Converter;
 @ThreadSafe
 @Converter(autoApply = true)
 public final class UserNameConverter
-        extends AbstractValueObjectConverter<String, UserName>
-        implements AttributeConverter<UserName, String> {
+        extends AbstractValueObjectConverter<String, UserName> {
 
     private UserNameValidator validator;
 

@@ -10,7 +10,6 @@ import br.ufla.lemaf.ti.lemaf4j.vo.EmailAddress;
 import javax.annotation.concurrent.ThreadSafe;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
-import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import javax.validation.constraints.NotNull;
 
@@ -23,8 +22,7 @@ import javax.validation.constraints.NotNull;
 @ThreadSafe
 @Converter(autoApply = true)
 public class EmailAddressConverter
-        extends AbstractValueObjectConverter<String, EmailAddress>
-        implements AttributeConverter<EmailAddress, String> {
+        extends AbstractValueObjectConverter<String, EmailAddress> {
 
     private EmailAddressValidator validator;
 

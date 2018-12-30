@@ -1,5 +1,6 @@
 package br.ufla.lemaf.ti.lemaf4j.common;
 
+import br.ufla.lemaf.ti.lemaf4j.utils.Error;
 import br.ufla.lemaf.ti.lemaf4j.utils.ErrorMessageFactory;
 
 import javax.annotation.Nullable;
@@ -10,8 +11,6 @@ import javax.validation.constraints.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import static br.ufla.lemaf.ti.lemaf4j.utils.Error.*;
 
 /**
  * Classe utilitária para asserções em
@@ -57,7 +56,7 @@ public final class Contract {
      */
     private Contract() {
         throw new UnsupportedOperationException(
-                INTANCIAR_CLASSE_UTILITARIA.message()
+                Error.INTANCIAR_CLASSE_UTILITARIA.message()
         );
     }
 
@@ -72,7 +71,7 @@ public final class Contract {
                                          final Object value) throws ConstraintViolationException {
         if (value == null) {
             throw new ConstraintViolationException(
-                    ErrorMessageFactory.of(ARGUMENTO_NULO, name)
+                    ErrorMessageFactory.of(Error.ARGUMENTO_NULO, name)
             );
         }
     }
@@ -91,7 +90,7 @@ public final class Contract {
         requireArgNotNull(name, value);
         if (value.length() < 1) {
             throw new ConstraintViolationException(
-                    ErrorMessageFactory.of(ARGUMENTO_VAZIO, name)
+                    ErrorMessageFactory.of(Error.ARGUMENTO_VAZIO, name)
             );
         }
     }
@@ -110,7 +109,7 @@ public final class Contract {
         if (value.length() > max) {
             throw new ConstraintViolationException(
                     ErrorMessageFactory.of(
-                            ARGUMENTO_MAX_LENGTH,
+                            Error.ARGUMENTO_MAX_LENGTH,
                             name,
                             max,
                             value.length()
@@ -133,7 +132,7 @@ public final class Contract {
         if (value.length() < min) {
             throw new ConstraintViolationException(
                     ErrorMessageFactory.of(
-                            ARGUMENTO_MIN_LENGTH,
+                            Error.ARGUMENTO_MIN_LENGTH,
                             name,
                             min,
                             value.length()
@@ -155,7 +154,7 @@ public final class Contract {
                                      final long max) throws ConstraintViolationException {
         if (value > max) {
             throw new ConstraintViolationException(
-                    ErrorMessageFactory.of(VALOR_MAX_LENGTH, name, max, value)
+                    ErrorMessageFactory.of(Error.VALOR_MAX_LENGTH, name, max, value)
             );
         }
     }
@@ -173,7 +172,7 @@ public final class Contract {
                                      final long min) throws ConstraintViolationException {
         if (value < min) {
             throw new ConstraintViolationException(
-                    ErrorMessageFactory.of(VALOR_MIN_LENGTH, name, min, value)
+                    ErrorMessageFactory.of(Error.VALOR_MIN_LENGTH, name, min, value)
             );
         }
     }

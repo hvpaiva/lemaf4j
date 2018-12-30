@@ -175,7 +175,7 @@ public class DigitoPara {
      * @return A soma dos caracteres do numero
      */
     private int somaDigitos(int total) {
-        return (total / DIVISOR_DEZ) + (total % DIVISOR_DEZ);
+        return total / DIVISOR_DEZ + total % DIVISOR_DEZ;
     }
 
     /**

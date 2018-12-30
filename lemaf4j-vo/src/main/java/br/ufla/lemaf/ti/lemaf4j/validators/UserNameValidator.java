@@ -33,10 +33,10 @@ public final class UserNameValidator implements ValueObjectValidator<String> {
      */
     @Override
     public boolean isValid(final String value) {
-        if ((value == null)
-                || (value.isEmpty())
-                || (value.length() < MIN_LENGTH)
-                || (value.length() > MAX_LENGTH)) return false;
+        if (value == null
+                || value.isEmpty()
+                || value.length() < MIN_LENGTH
+                || value.length() > MAX_LENGTH) return false;
 
         return PATTERN.matcher(value).matches();
     }

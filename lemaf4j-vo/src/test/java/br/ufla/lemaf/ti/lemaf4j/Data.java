@@ -1,5 +1,6 @@
 package br.ufla.lemaf.ti.lemaf4j;
 
+import br.ufla.lemaf.ti.lemaf4j.vo.CPF;
 import br.ufla.lemaf.ti.lemaf4j.vo.EmailAddress;
 import br.ufla.lemaf.ti.lemaf4j.vo.UserName;
 
@@ -26,5 +27,9 @@ public class Data {
     @Valid
     @XmlAttribute
     public UUID uuid;
+
+    @Valid
+    @XmlAttribute
+    public CPF cpf;
 
 }

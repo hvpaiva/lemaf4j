@@ -1,13 +1,22 @@
 package br.ufla.lemaf.ti.lemaf4j.converters;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.fuin.utils4j.JaxbUtils.XML_PREFIX;
+import static org.fuin.utils4j.JaxbUtils.marshal;
+import static org.fuin.utils4j.JaxbUtils.unmarshal;
+import static org.junit.Assert.fail;
 
+import br.ufla.lemaf.ti.lemaf4j.Data;
 import br.ufla.lemaf.ti.lemaf4j.vo.CPF;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.xml.bind.JAXBException;
+
 public class CPFConverterTest {
+
+    private static final String XML = XML_PREFIX + "<data cpf=\"11458201660\"/>";
 
     private CPFConverter converterToTest;
 
@@ -72,6 +81,37 @@ public class CPFConverterTest {
         assertThat(converterToTest.getBaseTypeClass()).isSameAs(String.class);
     }
 
-    // TODO - testar conversor marshall e unmarshall
+    @Test
+    public final void shouldMarshal() {
+
+        final Data data = new Data();
+        data.cpf = new CPF("11458201660");
+        assertThat(marshal(data, Data.class)).isEqualTo(XML);
+
+    }
+
+    @Test
+    public final void shouldMarshalUnmarshal() {
+
+        final Data data = unmarshal(XML, Data.class);
+        assertThat(data.cpf).isEqualTo(new CPF("11458201660"));
+
+    }
+
+    @Test
+    public final void shouldUnmarshalError() {
+
+        final String invalidCPFInXmlData = XML_PREFIX + "<data cpf=\"0000000\"/>";
+        try {
+            unmarshal(invalidCPFInXmlData, Data.class);
+            fail("Expected an exception");
+        } catch (final RuntimeException ex) {
+            assertThat(ex.getCause()).isNotNull();
+            assertThat(ex.getCause().getCause()).isNotNull();
+            assertThat(ex.getCause().getCause().getMessage())
+                    .isEqualTo("O argumento 'CPF' não é válido: '0000000'");
+        }
+
+    }
 
 }

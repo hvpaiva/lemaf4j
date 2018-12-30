@@ -3,6 +3,7 @@ image: maven:3-jdk-11
 variables:
   MAVEN_CLI_OPTS: "--errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
+  CODE_COVERED_OPTS: "-F"," '{ instructions += $4 + $5; covered += $5 } END { print covered, \"/\", instructions, \" instructions covered\"; print 100*covered/instructions\"% covered\" }'"
 
 cache:
   paths:
@@ -16,25 +17,14 @@ build:
 test:
   stage: test
   script:
-    - mvn $MAVEN_CLI_OPTS test
+    - mvn $MAVEN_CLI_OPTS verify jacoco:report
+    - awk $CODE_COVERED_OPTS lemaf4j-vo/target/site/jacoco/jacoco.csv
+  coverage: '/(\d+.\d+\%\) covered/'
 
-pages:
-  stage: deploy
-  dependencies:
-    - test
-  script:
-    - mvn clean verify jacoco:report
-    - cat lemaf4j-vo/target/site/jacoco/index.html
-    - mkdir public
-    - mv lemaf4j-vo/target/site/jacoco/index.html public
-  coverage: '/Total.*?([0-9]{1,3})%/'
-  artifacts:
-    paths:
-      - public
-
-deploy:
-  stage: deploy
-  script:
-    - mvn $MAVEN_CLI_OPTS verify
-  only:
-    - master
+#deploy:
+#  stage: deploy
+#  script:
+#    - mvn $MAVEN_CLI_OPTS verify
+#    - mvn $MAVEN_CLI_OPTS deploy
+#  only:
+#    - master

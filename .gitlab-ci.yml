@@ -17,9 +17,6 @@ test:
   stage: test
   script:
     - mvn $MAVEN_CLI_OPTS test
-  artifacts:
-    paths:
-      - target/coverage-reports/
 
 pages:
   stage: deploy
@@ -27,6 +24,7 @@ pages:
     - test
   script:
     - mvn clean verify jacoco:report
+    - cat lemaf4j-vo/target/site/jacoco/index.html
     - mkdir public
     - mv lemaf4j-vo/target/site/jacoco/index.html public
   coverage: '/Total.*?([0-9]{1,3})%/'

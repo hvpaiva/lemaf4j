@@ -26,9 +26,9 @@ pages:
   dependencies:
     - test
   script:
-    - mvn jacoco:report
+    - mvn clean verify jacoco:report
     - mkdir public
-    - mv target/site/jacoco/index.html public
+    - mv lemaf4j-vo/target/site/jacoco/index.html public
   coverage: '/Total.*?([0-9]{1,3})%/'
   artifacts:
     paths:

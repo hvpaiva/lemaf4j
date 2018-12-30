@@ -350,7 +350,7 @@
                     <useFile>true</useFile>
                     <skip>true</skip>
                     <argLine>
-                        -Duser.language=pt -Duser.country=BR --illegal-access=permit
+                        ${argLine} -Duser.language=pt -Duser.country=BR --illegal-access=permit
                     </argLine>
                     <systemProperties>
                         <property>
@@ -380,7 +380,7 @@
                 <version>3.0.0-M3</version>
                 <configuration>
                     <argLine>
-                        --illegal-access=permit
+                        --illegal-access=permit ${itCoverageAgent}
                     </argLine>
                 </configuration>
             </plugin>
@@ -391,8 +391,10 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.2</version>
                 <configuration>
+                    <argLine>surefireArgLine</argLine>
                     <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
                     <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
                 <executions>
                     <execution>
@@ -451,7 +453,7 @@
                         <phase>validate</phase>
                         <configuration>
                             <configLocation>checkstyle.xml</configLocation>
-                            <encoding>UTF-8</encoding>
+                            <encoding>${project.build.sourceEncoding}</encoding>
                             <consoleOutput>true</consoleOutput>
                             <failsOnError>true</failsOnError>
                         </configuration>
@@ -493,7 +495,6 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <linkXref>true</linkXref>
                     <sourceEncoding>utf-8</sourceEncoding>
                     <minimumTokens>100</minimumTokens>
                     <targetJdk>11</targetJdk>

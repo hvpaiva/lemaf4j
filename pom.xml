@@ -47,12 +47,12 @@
             <dependency>
                 <groupId>org.glassfish.jaxb</groupId>
                 <artifactId>jaxb-runtime</artifactId>
-                <version>2.4.0-b180608.0325</version>
+                <version>2.4.0-b180830.0438</version>
             </dependency>
             <dependency>
                 <groupId>org.fuin</groupId>
                 <artifactId>utils4j</artifactId>
-                <version>0.10.1-SNAPSHOT</version>
+                <version>0.10.0</version>
             </dependency>
 
             <dependency>
@@ -368,11 +368,6 @@
                         </goals>
                         <configuration>
                             <skip>false</skip>
-                            <excludes>
-                                <exclude>
-                                    **/integration/**/*.java
-                                </exclude>
-                            </excludes>
                         </configuration>
                     </execution>
                 </executions>
@@ -390,22 +385,20 @@
                 </configuration>
             </plugin>
 
+            <!--Plugin de Code Coverage-->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.2</version>
+                <configuration>
+                    <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
+                    <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
+                </configuration>
                 <executions>
                     <execution>
-                        <id>pre-unit-test</id>
+                        <id>default-prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>post-unit-test</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -434,36 +427,9 @@
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.1.0</version>
-                <configuration>
-                    <outputDirectory>
-                        ${project.build.directory}/modules
-                    </outputDirectory>
-                </configuration>
             </plugin>
 
-            <!--Para copiar as dependências do módulo para o diretório do mesmo-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.1.1</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>
-                                ${project.build.directory}/modules
-                            </outputDirectory>
-                            <includeScope>runtime</includeScope>
-                            <excludeArtifactIds>
-                                spring-boot-devtools
-                            </excludeArtifactIds>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--Plugin de qualidade de código-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
@@ -473,6 +439,8 @@
                     <printFailingErrors>true</printFailingErrors>
                 </configuration>
             </plugin>
+
+            <!--Plugin de regras de estilo de codigo-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -498,21 +466,28 @@
 
     <reporting>
         <plugins>
+            <!--plugin de reporting-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.7.1</version>
+                    <artifactId>maven-site-plugin</artifactId>
+                <version>3.7</version>
             </plugin>
+
+            <!--plugin de reporting-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
                 <version>2.9</version>
             </plugin>
+
+            <!--plugin de documentação-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
                 <version>2.3</version>
             </plugin>
+
+            <!--Plugin de documentação de qualidade de software-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
@@ -531,11 +506,15 @@
                     </excludeRoots>
                 </configuration>
             </plugin>
+
+            <!--Gerar javadoc-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.0.1</version>
             </plugin>
+
+            <!--Checkstyle-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -551,14 +530,6 @@
         </plugins>
     </reporting>
 
-    <repositories>
-        <repository>
-            <id>jvnet-nexus-staging</id>
-            <url>http://maven.java.net/content/repositories/staging/</url>
-            <layout>default</layout>
-        </repository>
-    </repositories>
-
     <developers>
         <developer>
             <id>hvpaiva</id>
@@ -573,40 +544,6 @@
             <timezone>-3</timezone>
         </developer>
     </developers>
-
-    <profiles>
-        <profile>
-            <id>integration</id>
-            <build>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <artifactId>
-                                maven-surefire-plugin
-                            </artifactId>
-                            <executions>
-                                <execution>
-                                    <id>run integration tests</id>
-                                    <phase>test</phase>
-                                    <goals>
-                                        <goal>test</goal>
-                                    </goals>
-                                    <configuration>
-                                        <skip>false</skip>
-                                        <includes>
-                                            <include>
-                                                **/integration/**/*Test.java
-                                            </include>
-                                        </includes>
-                                    </configuration>
-                                </execution>
-                            </executions>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
-            </build>
-        </profile>
-    </profiles>
 
     <scm>
         <connection>scm:git:git://http://gitlab.ti.lemaf.ufla.br/devops/lemaf4j.git</connection>

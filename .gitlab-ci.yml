@@ -20,16 +20,6 @@ test:
   artifacts:
     paths:
       - target/site/jacoco/
-pages:
-  stage: deploy
-  dependencies:
-    - test
-  script:
-    - mkdir public
-    - mv target/site/jacoco/index.html public
-  artifacts:
-    paths:
-      - public
 
 deploy:
   stage: deploy

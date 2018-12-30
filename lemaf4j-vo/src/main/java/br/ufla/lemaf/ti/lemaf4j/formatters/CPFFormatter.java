@@ -2,7 +2,6 @@ package br.ufla.lemaf.ti.lemaf4j.formatters;
 
 import br.ufla.lemaf.ti.lemaf4j.BaseStringFormatter;
 import br.ufla.lemaf.ti.lemaf4j.Formatter;
-import br.ufla.lemaf.ti.lemaf4j.validators.CPFValidator;
 
 import java.util.regex.Pattern;
 

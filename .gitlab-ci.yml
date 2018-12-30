@@ -1,7 +1,7 @@
 image: maven:3-jdk-11
 
 variables:
-  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+  MAVEN_CLI_OPTS: "--errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
 
 cache:
@@ -19,7 +19,20 @@ test:
     - mvn $MAVEN_CLI_OPTS test
   artifacts:
     paths:
-      - target/site/jacoco/
+      - target/coverage-reports/
+
+pages:
+  stage: deploy
+  dependencies:
+    - test
+  script:
+    - mvn jacoco:report
+    - mkdir public
+    - mv target/site/jacoco/index.html public
+  coverage: '/Total.*?([0-9]{1,3})%/'
+  artifacts:
+    paths:
+      - public
 
 deploy:
   stage: deploy

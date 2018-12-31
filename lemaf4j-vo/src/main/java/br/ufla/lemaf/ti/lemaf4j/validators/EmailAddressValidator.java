@@ -32,6 +32,16 @@ public final class EmailAddressValidator implements ValueObjectValidator<String>
     }
 
     /**
+     * Confere so o valor do Email é válido, lançando exceção
+     * {@link ConstraintViolationException} se não for.
+     *
+     * @param valor O valor a se validar
+     */
+    public void assertValid(@NotNull final String valor) {
+        assertValid("Email", valor);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -40,7 +50,7 @@ public final class EmailAddressValidator implements ValueObjectValidator<String>
 
         try {
 
-            InternetAddress.parse(value, false);
+            InternetAddress.parse(value, true);
 
             return true;
 

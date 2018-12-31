@@ -78,21 +78,13 @@ public final class CPFValidator implements ValueObjectValidator<String> {
                 errors.add(Error.INVALID_CPF_FORMAT);
 
             String unformattedCPF;
-            try {
-                if (formatter.isFormatted(cpf)) {
+            if (formatter.isFormatted(cpf)) {
 
-                    unformattedCPF = formatter.unformat(cpf);
+                unformattedCPF = formatter.unformat(cpf);
 
-                } else {
+            } else {
 
-                    unformattedCPF = cpf;
-
-                }
-
-            } catch (IllegalArgumentException e) {
-
-                errors.add(Error.INVALID_CPF_DIGITS);
-                return errors;
+                unformattedCPF = cpf;
 
             }
 

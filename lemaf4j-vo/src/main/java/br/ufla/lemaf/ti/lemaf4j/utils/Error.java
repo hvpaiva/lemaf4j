@@ -43,9 +43,4 @@ public enum Error implements ValidationMessage {
     public String message() {
         return message;
     }
-
-    @Override
-    public String toString() {
-        return message();
-    }
 }

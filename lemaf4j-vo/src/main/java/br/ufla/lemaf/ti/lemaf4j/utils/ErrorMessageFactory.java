@@ -13,7 +13,7 @@ public final class ErrorMessageFactory {
      * Construtor privado para
      * evitar instanciação.
      */
-    private ErrorMessageFactory() {
+    protected ErrorMessageFactory() {
         throw new UnsupportedOperationException(
                 Error.INTANCIAR_CLASSE_UTILITARIA.message()
         );

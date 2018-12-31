@@ -38,7 +38,7 @@ public final class UserNameValidator implements ValueObjectValidator<String> {
                 || value.length() < MIN_LENGTH
                 || value.length() > MAX_LENGTH) return false;
 
-        return PATTERN.matcher(value).matches();
+        return PATTERN.matcher(value.toLowerCase()).matches();
     }
 
     /**
@@ -51,5 +51,15 @@ public final class UserNameValidator implements ValueObjectValidator<String> {
             throw new ConstraintViolationException(
                     ErrorMessageFactory.of(Error.ARGUMENTO_INVALIDO, name, value)
             );
+    }
+
+    /**
+     * Confere so o valor do Username é válido, lançando exceção
+     * {@link ConstraintViolationException} se não for.
+     *
+     * @param valor O valor a se validar
+     */
+    public void assertValid(@NotNull final String valor) {
+        assertValid("Username", valor);
     }
 }

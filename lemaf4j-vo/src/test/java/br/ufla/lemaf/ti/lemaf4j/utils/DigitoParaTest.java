@@ -63,6 +63,15 @@ public class DigitoParaTest {
                         .mod(11)
                         .calcula()
         );
+        Assert.assertEquals(
+                "6",
+                new DigitoPara("42105900")
+                        .comMultiplicadoresDeAte(2, 9)
+                        .trocandoPorSeEncontrar("X", 10)
+                        .mod(11)
+                        .somandoIndividualmente()
+                        .calcula()
+        );
     }
 
 }

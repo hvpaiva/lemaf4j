@@ -14,6 +14,7 @@
         <class>br.ufla.lemaf.ti.lemaf4j.helpers.EmailAddressParentEntity</class>
         <class>br.ufla.lemaf.ti.lemaf4j.helpers.UserNameParentEntity</class>
         <class>br.ufla.lemaf.ti.lemaf4j.helpers.LocaleParentEntity</class>
+        <class>br.ufla.lemaf.ti.lemaf4j.helpers.UUIDParentEntity</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>

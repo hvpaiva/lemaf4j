@@ -1,16 +1,16 @@
 package br.ufla.lemaf.ti.lemaf4j.validators;
 
-import static junit.framework.TestCase.fail;
-import static org.assertj.core.api.Assertions.assertThat;
-
 import br.ufla.lemaf.ti.lemaf4j.common.ConstraintViolationException;
+import br.ufla.lemaf.ti.lemaf4j.common.messaging.ValidationMessage;
 import br.ufla.lemaf.ti.lemaf4j.utils.Error;
-import br.ufla.lemaf.ti.lemaf4j.utils.ValidationMessage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+
+import static junit.framework.TestCase.fail;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CPFValidatorTest {
 

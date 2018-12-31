@@ -1,4 +1,4 @@
-package br.ufla.lemaf.ti.lemaf4j.utils;
+package br.ufla.lemaf.ti.lemaf4j.common.messaging;
 
 /**
  * Mensagens de erro sobre a validação de
@@ -10,6 +10,8 @@ package br.ufla.lemaf.ti.lemaf4j.utils;
 public interface ValidationMessage {
 
     /**
+     * Busca a mensagem de validação.
+     *
      * @return mensagem de validação armazenda.
      */
     String message();

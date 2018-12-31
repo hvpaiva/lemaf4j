@@ -1,5 +1,7 @@
 package br.ufla.lemaf.ti.lemaf4j.utils;
 
+import br.ufla.lemaf.ti.lemaf4j.common.messaging.ValidationMessage;
+
 /**
  * Erros comuns da aplicação e suas mensagems.
  *

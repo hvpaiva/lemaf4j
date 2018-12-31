@@ -2,11 +2,11 @@ package br.ufla.lemaf.ti.lemaf4j.validators;
 
 import br.ufla.lemaf.ti.lemaf4j.ValueObjectValidator;
 import br.ufla.lemaf.ti.lemaf4j.common.ConstraintViolationException;
+import br.ufla.lemaf.ti.lemaf4j.common.messaging.ValidationMessage;
 import br.ufla.lemaf.ti.lemaf4j.formatters.CPFFormatter;
 import br.ufla.lemaf.ti.lemaf4j.utils.DigitoPara;
 import br.ufla.lemaf.ti.lemaf4j.utils.Error;
 import br.ufla.lemaf.ti.lemaf4j.utils.ErrorMessageFactory;
-import br.ufla.lemaf.ti.lemaf4j.utils.ValidationMessage;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;

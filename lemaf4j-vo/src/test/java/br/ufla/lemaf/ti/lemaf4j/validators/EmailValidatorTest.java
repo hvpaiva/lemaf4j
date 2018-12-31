@@ -8,15 +8,15 @@ import org.junit.Test;
 import static junit.framework.TestCase.fail;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class EmailAddressValidatorTest {
+public class EmailValidatorTest {
 
     private static final String VALID_EMAIL = "e@m.c";
 
-    private EmailAddressValidator validatorToTest;
+    private EmailValidator validatorToTest;
 
     @Before
     public final void setUp() {
-        validatorToTest = new EmailAddressValidator();
+        validatorToTest = new EmailValidator();
     }
 
     @After

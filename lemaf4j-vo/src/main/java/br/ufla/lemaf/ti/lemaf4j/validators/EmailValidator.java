@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
  * @author Highlander Paiva
  * @since 1.0
  */
-public final class EmailAddressValidator implements ValueObjectValidator<String> {
+public final class EmailValidator implements ValueObjectValidator<String> {
 
     /**
      * {@inheritDoc}

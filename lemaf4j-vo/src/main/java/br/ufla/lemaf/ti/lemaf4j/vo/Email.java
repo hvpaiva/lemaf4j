@@ -2,8 +2,8 @@ package br.ufla.lemaf.ti.lemaf4j.vo;
 
 import br.ufla.lemaf.ti.lemaf4j.AbstractStringValueObject;
 import br.ufla.lemaf.ti.lemaf4j.common.Contract;
-import br.ufla.lemaf.ti.lemaf4j.converters.EmailAddressConverter;
-import br.ufla.lemaf.ti.lemaf4j.validators.EmailAddressValidator;
+import br.ufla.lemaf.ti.lemaf4j.converters.EmailConverter;
+import br.ufla.lemaf.ti.lemaf4j.validators.EmailValidator;
 
 import javax.annotation.concurrent.Immutable;
 import javax.mail.internet.InternetAddress;
@@ -17,19 +17,19 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * @since 1.0
  */
 @Immutable
-@XmlJavaTypeAdapter(EmailAddressConverter.class)
-public final class EmailAddress extends AbstractStringValueObject {
+@XmlJavaTypeAdapter(EmailConverter.class)
+public final class Email extends AbstractStringValueObject {
 
     private static final long serialVersionUID = 1L;
 
-    private static EmailAddressValidator validator = new EmailAddressValidator();
+    private static EmailValidator validator = new EmailValidator();
 
-    private InternetAddress email;
+    private InternetAddress emailStr;
 
     /**
      * Construtor protected para deserialização.
      */
-    protected EmailAddress() {
+    protected Email() {
         super();
     }
 
@@ -38,13 +38,13 @@ public final class EmailAddress extends AbstractStringValueObject {
      *
      * @param emailAddress Email
      */
-    public EmailAddress(@NotNull final String emailAddress) {
+    public Email(@NotNull final String emailAddress) {
         super();
         Contract.requireArgNotEmpty("emailAddress", emailAddress);
 
         validator.assertValid("emailAddress", emailAddress);
 
-        this.email = EmailAddressConverter.toInternetAddress(emailAddress);
+        this.emailStr = EmailConverter.toInternetAddress(emailAddress);
     }
 
     /**
@@ -52,7 +52,7 @@ public final class EmailAddress extends AbstractStringValueObject {
      */
     @Override
     public String asBaseType() {
-        return email.toString();
+        return emailStr.toString();
     }
 
     /**

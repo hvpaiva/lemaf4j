@@ -23,6 +23,11 @@ public class CPFTest extends AbstractPersistenceTest {
     }
 
     @Test
+    public void shouldNotInstantiateDefaultVOClasses() {
+        new CPF();
+    }
+
+    @Test
     public void shouldAcceptValidFormattedCPF() {
         CPF cpf = new CPF("114.582.016-60");
         assertEquals("11458201660", cpf.unformatted());

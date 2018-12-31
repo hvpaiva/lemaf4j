@@ -36,6 +36,7 @@ public class UserNameConverterTest {
     @Test
     public final void shouldTestToVO() {
         assertThat(converterToTest.toVO(VALID_USERNAME)).isEqualTo(new UserName(VALID_USERNAME));
+        assertThat(converterToTest.toVO(null)).isEqualTo(null);
     }
 
     @Test

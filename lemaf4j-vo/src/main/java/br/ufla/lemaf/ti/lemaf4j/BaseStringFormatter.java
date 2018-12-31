@@ -71,9 +71,6 @@ public class BaseStringFormatter implements Formatter<String> {
 
         if (isNotFormatted(value)) return value;
 
-        Matcher unformattedMatcher = unformatted.matcher(value);
-        if (unformattedMatcher.matches()) return value;
-
         Matcher matcher = formatted.matcher(value);
         result = matchAndReplace(matcher, unformattedReplacement);
 
@@ -128,7 +125,7 @@ public class BaseStringFormatter implements Formatter<String> {
     private void assetNotNull(String value) {
         if (value == null)
             throw new IllegalArgumentException(
-                    ErrorMessageFactory.of(Error.ARGUMENTO_NULO)
+                    ErrorMessageFactory.of(Error.ARGUMENTO_NULO, "CPF")
             );
     }
 }

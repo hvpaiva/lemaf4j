@@ -21,6 +21,11 @@ public class UserNameTest extends AbstractPersistenceTest {
     }
 
     @Test
+    public void shouldNotInstantiateDefaultVOClasses() {
+        new UserName();
+    }
+
+    @Test
     public void shouldConstructValid() {
         final var email = new UserName(VALID_USERNAME);
         assertThat(email.asBaseType()).isEqualTo(VALID_USERNAME);

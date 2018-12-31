@@ -21,6 +21,11 @@ public class EmailAddressTest extends AbstractPersistenceTest {
     }
 
     @Test
+    public void shouldNotInstantiateDefaultVOClasses() {
+        new EmailAddress();
+    }
+
+    @Test
     public void shouldConstructValid() {
         final var email = new EmailAddress(VALID_EMAIL);
         assertThat(email.asBaseType()).isEqualTo(VALID_EMAIL);

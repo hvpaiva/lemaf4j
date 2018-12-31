@@ -4,9 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.*;
 
 public class CPFFormatterTest {
 
@@ -53,6 +52,17 @@ public class CPFFormatterTest {
         formatterToTest.format("123456789");
         formatterToTest.unformat("aaa.aaa.aaa-aa");
         formatterToTest.unformat("aaaaaaaaaaa");
+    }
+
+    @Test
+    public void shouldThrowNullArgumentException() {
+        try {
+            formatterToTest.format(null);
+            fail("Expected an exception");
+        } catch (final IllegalArgumentException ex) {
+            assertThat(ex.getMessage())
+                    .isEqualTo("O argumento 'CPF' não pode ser nulo!");
+        }
     }
 
     @Test(expected = IllegalArgumentException.class)

@@ -39,6 +39,7 @@ public class CPFConverterTest {
         assertThat(converterToTest.toVO("11458201660")).isEqualTo(new CPF("114.582.016-60"));
         assertThat(converterToTest.toVO("11458201660")).isEqualTo(new CPF("11458201660"));
         assertThat(converterToTest.toVO("114.582.016-60")).isEqualTo(new CPF("11458201660"));
+        assertThat(converterToTest.toVO(null)).isEqualTo(null);
     }
 
     @Test

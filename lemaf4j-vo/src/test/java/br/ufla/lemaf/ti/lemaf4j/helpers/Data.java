@@ -4,6 +4,7 @@ import br.ufla.lemaf.ti.lemaf4j.vo.CPF;
 import br.ufla.lemaf.ti.lemaf4j.vo.EmailAddress;
 import br.ufla.lemaf.ti.lemaf4j.vo.UserName;
 
+import java.util.Locale;
 import java.util.UUID;
 
 import javax.validation.Valid;
@@ -20,10 +21,6 @@ public class Data {
     @Valid
     @XmlAttribute
     public UserName userName;
-
-    @Valid
-    @XmlAttribute
-    public UUID uuid;
 
     @Valid
     @XmlAttribute

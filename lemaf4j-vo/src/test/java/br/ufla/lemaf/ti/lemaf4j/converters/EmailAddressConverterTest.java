@@ -1,10 +1,13 @@
 package br.ufla.lemaf.ti.lemaf4j.converters;
 
+import br.ufla.lemaf.ti.lemaf4j.common.ConstraintViolationException;
 import br.ufla.lemaf.ti.lemaf4j.helpers.Data;
 import br.ufla.lemaf.ti.lemaf4j.vo.EmailAddress;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import javax.mail.internet.AddressException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fuin.utils4j.JaxbUtils.*;
@@ -37,6 +40,7 @@ public class EmailAddressConverterTest {
     @Test
     public final void shouldTestToVO() {
         assertThat(converterToTest.toVO(VALID_EMAIL)).isEqualTo(new EmailAddress(VALID_EMAIL));
+        assertThat(converterToTest.toVO(null)).isEqualTo(null);
     }
 
     @Test
@@ -60,6 +64,16 @@ public class EmailAddressConverterTest {
         assertThat(converterToTest.canBeConverted(null)).isFalse();
         assertThat(converterToTest.canBeConverted("")).isFalse();
         assertThat(converterToTest.canBeConverted(INVALID_EMAIL)).isFalse();
+    }
+
+    @Test(expected = ConstraintViolationException.class)
+    public final void shouldNotConvertInvalidEmail() {
+        EmailAddressConverter.toInternetAddress(INVALID_EMAIL);
+    }
+
+    @Test(expected = ConstraintViolationException.class)
+    public final void shouldNotConvertMultipleEmails() {
+        EmailAddressConverter.toInternetAddress("hi@c.c alt@g.c");
     }
 
     @Test

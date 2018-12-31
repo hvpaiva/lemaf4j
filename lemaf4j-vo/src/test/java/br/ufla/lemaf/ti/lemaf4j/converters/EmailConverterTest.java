@@ -2,29 +2,26 @@ package br.ufla.lemaf.ti.lemaf4j.converters;
 
 import br.ufla.lemaf.ti.lemaf4j.common.ConstraintViolationException;
 import br.ufla.lemaf.ti.lemaf4j.helpers.Data;
-import br.ufla.lemaf.ti.lemaf4j.vo.EmailAddress;
+import br.ufla.lemaf.ti.lemaf4j.vo.Email;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.mail.internet.AddressException;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fuin.utils4j.JaxbUtils.*;
-import static org.fuin.utils4j.JaxbUtils.unmarshal;
 import static org.junit.Assert.fail;
 
-public class EmailAddressConverterTest {
+public class EmailConverterTest {
 
     private static final String XML = XML_PREFIX + "<data email=\"e@m.c\"/>";
     private static final String VALID_EMAIL = "e@m.c";
     private static final String INVALID_EMAIL = "e@";
 
-    private EmailAddressConverter converterToTest;
+    private EmailConverter converterToTest;
 
     @Before
     public void setUp() {
-        converterToTest = new EmailAddressConverter();
+        converterToTest = new EmailConverter();
     }
 
     @After
@@ -39,23 +36,23 @@ public class EmailAddressConverterTest {
 
     @Test
     public final void shouldTestToVO() {
-        assertThat(converterToTest.toVO(VALID_EMAIL)).isEqualTo(new EmailAddress(VALID_EMAIL));
+        assertThat(converterToTest.toVO(VALID_EMAIL)).isEqualTo(new Email(VALID_EMAIL));
         assertThat(converterToTest.toVO(null)).isEqualTo(null);
     }
 
     @Test
     public final void shouldTestFromVO() {
-        assertThat(converterToTest.fromVO(new EmailAddress(VALID_EMAIL))).isEqualTo(VALID_EMAIL);
+        assertThat(converterToTest.fromVO(new Email(VALID_EMAIL))).isEqualTo(VALID_EMAIL);
     }
 
     @Test
     public final void shouldTestConvertToDatabaseColumn() {
-        assertThat(converterToTest.convertToDatabaseColumn(new EmailAddress(VALID_EMAIL))).isEqualTo(VALID_EMAIL);
+        assertThat(converterToTest.convertToDatabaseColumn(new Email(VALID_EMAIL))).isEqualTo(VALID_EMAIL);
     }
 
     @Test
     public final void shouldTestConvertToEntityAttribute() {
-        assertThat(converterToTest.convertToEntityAttribute(VALID_EMAIL)).isEqualTo(new EmailAddress(VALID_EMAIL));
+        assertThat(converterToTest.convertToEntityAttribute(VALID_EMAIL)).isEqualTo(new Email(VALID_EMAIL));
     }
 
     @Test
@@ -68,17 +65,17 @@ public class EmailAddressConverterTest {
 
     @Test(expected = ConstraintViolationException.class)
     public final void shouldNotConvertInvalidEmail() {
-        EmailAddressConverter.toInternetAddress(INVALID_EMAIL);
+        EmailConverter.toInternetAddress(INVALID_EMAIL);
     }
 
     @Test(expected = ConstraintViolationException.class)
     public final void shouldNotConvertMultipleEmails() {
-        EmailAddressConverter.toInternetAddress("hi@c.c alt@g.c");
+        EmailConverter.toInternetAddress("hi@c.c alt@g.c");
     }
 
     @Test
     public final void shouldTestGetSimpleValueObjectClass() {
-        assertThat(converterToTest.getValueObjectClass()).isSameAs(EmailAddress.class);
+        assertThat(converterToTest.getValueObjectClass()).isSameAs(Email.class);
     }
 
     @Test
@@ -90,7 +87,7 @@ public class EmailAddressConverterTest {
     public final void shouldMarshal() {
 
         final Data data = new Data();
-        data.email = new EmailAddress(VALID_EMAIL);
+        data.email = new Email(VALID_EMAIL);
         assertThat(marshal(data, Data.class)).isEqualTo(XML);
 
     }
@@ -99,7 +96,7 @@ public class EmailAddressConverterTest {
     public final void shouldMarshalUnmarshal() {
 
         final Data data = unmarshal(XML, Data.class);
-        assertThat(data.email).isEqualTo(new EmailAddress(VALID_EMAIL));
+        assertThat(data.email).isEqualTo(new Email(VALID_EMAIL));
 
     }
 

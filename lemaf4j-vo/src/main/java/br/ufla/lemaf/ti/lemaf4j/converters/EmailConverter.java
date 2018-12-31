@@ -4,8 +4,8 @@ import br.ufla.lemaf.ti.lemaf4j.AbstractValueObjectConverter;
 import br.ufla.lemaf.ti.lemaf4j.common.ConstraintViolationException;
 import br.ufla.lemaf.ti.lemaf4j.utils.Error;
 import br.ufla.lemaf.ti.lemaf4j.utils.ErrorMessageFactory;
-import br.ufla.lemaf.ti.lemaf4j.validators.EmailAddressValidator;
-import br.ufla.lemaf.ti.lemaf4j.vo.EmailAddress;
+import br.ufla.lemaf.ti.lemaf4j.validators.EmailValidator;
+import br.ufla.lemaf.ti.lemaf4j.vo.Email;
 
 import javax.annotation.concurrent.ThreadSafe;
 import javax.mail.internet.AddressException;
@@ -14,24 +14,24 @@ import javax.persistence.Converter;
 import javax.validation.constraints.NotNull;
 
 /**
- * Conversor do VO EmailAddress de/para String.
+ * Conversor do VO Email de/para String.
  *
  * @author Highlander Paiva
  * @since 1.0
  */
 @ThreadSafe
 @Converter(autoApply = true)
-public class EmailAddressConverter
-        extends AbstractValueObjectConverter<String, EmailAddress> {
+public class EmailConverter
+        extends AbstractValueObjectConverter<String, Email> {
 
-    private EmailAddressValidator validator;
+    private EmailValidator validator;
 
     /**
-     * Construtor padrão do EmailAddressConverter.
+     * Construtor padrão do EmailConverter.
      * Injeta a dependência de EmailAddressValidador.
      */
-    public EmailAddressConverter() {
-        this.validator = new EmailAddressValidator();
+    public EmailConverter() {
+        this.validator = new EmailValidator();
     }
 
     /**
@@ -46,8 +46,8 @@ public class EmailAddressConverter
      * {@inheritDoc}
      */
     @Override
-    public final Class<EmailAddress> getValueObjectClass() {
-        return EmailAddress.class;
+    public final Class<Email> getValueObjectClass() {
+        return Email.class;
     }
 
     /**
@@ -62,17 +62,17 @@ public class EmailAddressConverter
      * {@inheritDoc}
      */
     @Override
-    public final EmailAddress toVO(final String value) {
+    public final Email toVO(final String value) {
         if (value == null) return null;
 
-        return new EmailAddress(value);
+        return new Email(value);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public final String fromVO(final EmailAddress value) {
+    public final String fromVO(final Email value) {
         if (value == null) return null;
 
         return value.toString();

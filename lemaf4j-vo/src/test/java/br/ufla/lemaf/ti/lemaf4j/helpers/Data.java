@@ -1,11 +1,8 @@
 package br.ufla.lemaf.ti.lemaf4j.helpers;
 
 import br.ufla.lemaf.ti.lemaf4j.vo.CPF;
-import br.ufla.lemaf.ti.lemaf4j.vo.EmailAddress;
+import br.ufla.lemaf.ti.lemaf4j.vo.Email;
 import br.ufla.lemaf.ti.lemaf4j.vo.UserName;
-
-import java.util.Locale;
-import java.util.UUID;
 
 import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -16,7 +13,7 @@ public class Data {
 
     @Valid
     @XmlAttribute
-    public EmailAddress email;
+    public Email email;
 
     @Valid
     @XmlAttribute

@@ -36,7 +36,7 @@ O módulo Lemaf4j-vo possui dois objetivos primários:
 - CNPJ
 - CEP
 - UserName
-- EmailAddress
+- Email
 - NumeroTelefone
 - NumeroCAR
 - CodigoAssentamento

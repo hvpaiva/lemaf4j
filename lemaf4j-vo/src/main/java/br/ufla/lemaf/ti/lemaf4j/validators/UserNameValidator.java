@@ -52,4 +52,14 @@ public final class UserNameValidator implements ValueObjectValidator<String> {
                     ErrorMessageFactory.of(Error.ARGUMENTO_INVALIDO, name, value)
             );
     }
+
+    /**
+     * Confere so o valor do Username é válido, lançando exceção
+     * {@link ConstraintViolationException} se não for.
+     *
+     * @param valor O valor a se validar
+     */
+    public void assertValid(@NotNull final String valor) {
+        assertValid("Username", valor);
+    }
 }

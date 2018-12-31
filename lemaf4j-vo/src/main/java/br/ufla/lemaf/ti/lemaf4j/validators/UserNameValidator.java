@@ -38,7 +38,7 @@ public final class UserNameValidator implements ValueObjectValidator<String> {
                 || value.length() < MIN_LENGTH
                 || value.length() > MAX_LENGTH) return false;
 
-        return PATTERN.matcher(value).matches();
+        return PATTERN.matcher(value.toLowerCase()).matches();
     }
 
     /**

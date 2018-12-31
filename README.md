@@ -13,8 +13,7 @@ e abstrações lógicas comuns.
 
 ### LEMAF4J-VO
 
-Módulo de Value Objects, contem implementações e utilitários comuns 
-de VOs
+Módulo de Value Objects, contem implementações das VOs mais usadas e utilitários para criação de VOs personalizadas.
 
 [Mais informações](http://gitlab.ti.lemaf.ufla.br/devops/lemaf4j/tree/master/lemaf4j-vo#lemaf4j-vo)
 

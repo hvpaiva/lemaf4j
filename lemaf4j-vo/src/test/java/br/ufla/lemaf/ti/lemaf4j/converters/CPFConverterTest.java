@@ -6,13 +6,11 @@ import static org.fuin.utils4j.JaxbUtils.marshal;
 import static org.fuin.utils4j.JaxbUtils.unmarshal;
 import static org.junit.Assert.fail;
 
-import br.ufla.lemaf.ti.lemaf4j.Data;
+import br.ufla.lemaf.ti.lemaf4j.helpers.Data;
 import br.ufla.lemaf.ti.lemaf4j.vo.CPF;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import javax.xml.bind.JAXBException;
 
 public class CPFConverterTest {
 

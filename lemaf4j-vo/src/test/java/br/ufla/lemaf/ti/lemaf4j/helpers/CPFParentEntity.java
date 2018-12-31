@@ -1,4 +1,4 @@
-package br.ufla.lemaf.ti.lemaf4j;
+package br.ufla.lemaf.ti.lemaf4j.helpers;
 
 import br.ufla.lemaf.ti.lemaf4j.converters.CPFConverter;
 import br.ufla.lemaf.ti.lemaf4j.vo.CPF;

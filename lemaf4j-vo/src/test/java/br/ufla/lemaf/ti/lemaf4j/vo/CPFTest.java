@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.fuin.utils4j.Utils4J.deserialize;
 import static org.fuin.utils4j.Utils4J.serialize;
 
-import br.ufla.lemaf.ti.lemaf4j.CPFParentEntity;
+import br.ufla.lemaf.ti.lemaf4j.helpers.CPFParentEntity;
 import br.ufla.lemaf.ti.lemaf4j.common.ConstraintViolationException;
 import org.fuin.units4j.AbstractPersistenceTest;
 import org.junit.Test;

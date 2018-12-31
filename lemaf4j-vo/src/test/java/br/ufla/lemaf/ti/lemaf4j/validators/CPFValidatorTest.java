@@ -1,5 +1,6 @@
 package br.ufla.lemaf.ti.lemaf4j.validators;
 
+import static junit.framework.TestCase.fail;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import br.ufla.lemaf.ti.lemaf4j.common.ConstraintViolationException;
@@ -96,6 +97,25 @@ public class CPFValidatorTest {
     @Test
     public void shouldValidateCPFWithLeadingZeros() {
         validatorToTest.assertValid("01169538452");
+    }
+
+    @Test
+    public final void shouldThrowRightErrorMessage() {
+
+        try {
+            validatorToTest.assertValid("a", "");
+            fail();
+        } catch (final ConstraintViolationException ex) {
+            assertThat(ex.getMessage()).isEqualTo("O argumento 'a' não é válido: ''");
+        }
+
+        try {
+            validatorToTest.assertValid("11111111");
+            fail();
+        } catch (final ConstraintViolationException ex) {
+            assertThat(ex.getMessage()).isEqualTo("O argumento 'CPF' não é válido: '11111111'");
+        }
+
     }
 
     //TODO - testar mensagens de erro (Pulado pois acho que vou trocar como as mensagens funcionam)

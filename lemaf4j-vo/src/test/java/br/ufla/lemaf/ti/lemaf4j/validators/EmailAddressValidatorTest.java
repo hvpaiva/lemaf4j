@@ -5,6 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static junit.framework.TestCase.fail;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class EmailAddressValidatorTest {
@@ -35,6 +36,8 @@ public class EmailAddressValidatorTest {
         assertThat(validatorToTest.isValid(null)).isFalse();
         assertThat(validatorToTest.isValid("e@")).isFalse();
         assertThat(validatorToTest.isValid("e @ c . d")).isFalse();
+        assertThat(validatorToTest.isValid("abc@.def")).isFalse();
+        assertThat(validatorToTest.isValid("abc@.")).isFalse();
     }
 
     @Test
@@ -48,6 +51,25 @@ public class EmailAddressValidatorTest {
         validatorToTest.assertValid(null);
         validatorToTest.assertValid("e@");
         validatorToTest.assertValid("e @ c .d");
+    }
+
+    @Test
+    public final void shouldThrowRightErrorMessage() {
+
+        try {
+            validatorToTest.assertValid("a", "");
+            fail();
+        } catch (final ConstraintViolationException ex) {
+            assertThat(ex.getMessage()).isEqualTo("O argumento 'a' não é válido: ''");
+        }
+
+        try {
+            validatorToTest.assertValid("abc@");
+            fail();
+        } catch (final ConstraintViolationException ex) {
+            assertThat(ex.getMessage()).isEqualTo("O argumento 'Email' não é válido: 'abc@'");
+        }
+
     }
 
 }

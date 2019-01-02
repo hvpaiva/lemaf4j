@@ -1,8 +1,8 @@
 package br.ufla.lemaf.ti.lemaf4j.vo;
 
 import br.ufla.lemaf.ti.lemaf4j.AbstractStringValueObject;
-import br.ufla.lemaf.ti.lemaf4j.common.Contract;
 import br.ufla.lemaf.ti.lemaf4j.Formattable;
+import br.ufla.lemaf.ti.lemaf4j.common.Contract;
 import br.ufla.lemaf.ti.lemaf4j.converters.CPFConverter;
 import br.ufla.lemaf.ti.lemaf4j.formatters.CPFFormatter;
 import br.ufla.lemaf.ti.lemaf4j.validators.CPFValidator;
@@ -46,7 +46,7 @@ public final class CPF extends AbstractStringValueObject implements Formattable<
         Contract.requireArgNotNull("CPF", codigoCpf);
         Contract.requireArgNotEmpty("CPF", codigoCpf);
 
-        validator.assertValid("CPF", codigoCpf);
+        validator.assertValid(codigoCpf);
 
         if (formatter.isFormatted(codigoCpf)) {
             this.codigo = formatter.unformat(codigoCpf);

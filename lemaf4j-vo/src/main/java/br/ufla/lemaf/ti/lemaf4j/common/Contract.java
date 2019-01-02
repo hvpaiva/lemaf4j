@@ -1,7 +1,9 @@
 package br.ufla.lemaf.ti.lemaf4j.common;
 
-import br.ufla.lemaf.ti.lemaf4j.utils.Error;
-import br.ufla.lemaf.ti.lemaf4j.utils.ErrorMessageFactory;
+import br.ufla.lemaf.ti.lemaf4j.common.errors.Error;
+import br.ufla.lemaf.ti.lemaf4j.common.messaging.ErrorType;
+import br.ufla.lemaf.ti.lemaf4j.common.messaging.MessageProducer;
+import br.ufla.lemaf.ti.lemaf4j.common.messaging.SimpleMessageProducer;
 
 import javax.validation.constraints.NotNull;
 
@@ -14,12 +16,14 @@ import javax.validation.constraints.NotNull;
  */
 public final class Contract {
 
+    private static MessageProducer messageProducer;
+
     /**
      * Construtor privado para evitar instanciação.
      */
     protected Contract() {
         throw new UnsupportedOperationException(
-                Error.INTANCIAR_CLASSE_UTILITARIA.message()
+                constructErrorMessage(Error.CLASSE_UTILITARIA_NAO_PODE_SER_INSTANCIADA)
         );
     }
 
@@ -34,7 +38,7 @@ public final class Contract {
                                          final Object value) {
         if (value == null) {
             throw new ConstraintViolationException(
-                    ErrorMessageFactory.of(Error.ARGUMENTO_NULO, name)
+                    constructErrorMessage(Error.ARGUMENTO_NULO, name)
             );
         }
     }
@@ -53,7 +57,7 @@ public final class Contract {
         requireArgNotNull(name, value);
         if (value.length() < 1) {
             throw new ConstraintViolationException(
-                    ErrorMessageFactory.of(Error.ARGUMENTO_VAZIO, name)
+                    constructErrorMessage(Error.ARGUMENTO_VAZIO, name)
             );
         }
     }
@@ -71,8 +75,8 @@ public final class Contract {
                                            final int max) {
         if (value.length() > max) {
             throw new ConstraintViolationException(
-                    ErrorMessageFactory.of(
-                            Error.ARGUMENTO_MAX_LENGTH,
+                    constructErrorMessage(
+                            Error.TAMANHO_MAXIMO_ATINGIDO,
                             name,
                             max,
                             value.length()
@@ -94,8 +98,8 @@ public final class Contract {
                                            final int min) {
         if (value.length() < min) {
             throw new ConstraintViolationException(
-                    ErrorMessageFactory.of(
-                            Error.ARGUMENTO_MIN_LENGTH,
+                    constructErrorMessage(
+                            Error.TAMANHO_MINIMO_NAO_ALCANCADO,
                             name,
                             min,
                             value.length()
@@ -114,10 +118,10 @@ public final class Contract {
      */
     public static void requireArgMax(@NotNull final String name,
                                      @NotNull final long value,
-                                     final long max) throws ConstraintViolationException {
+                                     final long max) {
         if (value > max) {
             throw new ConstraintViolationException(
-                    ErrorMessageFactory.of(Error.VALOR_MAX_LENGTH, name, max, value)
+                    constructErrorMessage(Error.VALOR_MAXIMO_ATINGIDO, name, max, value)
             );
         }
     }
@@ -132,12 +136,44 @@ public final class Contract {
      */
     public static void requireArgMin(@NotNull final String name,
                                      @NotNull final long value,
-                                     final long min) throws ConstraintViolationException {
+                                     final long min) {
         if (value < min) {
             throw new ConstraintViolationException(
-                    ErrorMessageFactory.of(Error.VALOR_MIN_LENGTH, name, min, value)
+                    constructErrorMessage(Error.VALOR_MINIMO_NAO_ALCANCADO, name, min, value)
             );
         }
+    }
+
+    /**
+     * Adiciona um MensageProducer personalizado.
+     *
+     * @param producer O MessageProducer
+     */
+    public static void setMessageProducer(MessageProducer producer) {
+        messageProducer = producer;
+    }
+
+    /**
+     * Remove MensageProducer personalizado.
+     */
+    public static void removeMessageProducer() {
+        messageProducer = null;
+    }
+
+    /**
+     * Constrói as mensagens de Erro.
+     * Caso o message producer seja nulo, ele criará o
+     * SimpleMessageProducer.
+     *
+     * @param error O tipo de erro
+     * @param args  Os argumentos
+     * @return A String representando o erro
+     */
+    private static String constructErrorMessage(ErrorType error, Object... args) {
+        if (messageProducer == null)
+            return new SimpleMessageProducer().messageOf(error).message();
+
+        return messageProducer.messageOf(error, args).message();
     }
 
 }

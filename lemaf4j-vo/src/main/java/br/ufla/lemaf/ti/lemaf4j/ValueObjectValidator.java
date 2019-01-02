@@ -13,12 +13,11 @@ public interface ValueObjectValidator<B> {
      * Confere se o argumento é válido,
      * lançando uma exceção em caso negativo.
      *
-     * @param name O nome do argumento, para mensagem de erro
      * @param value O valor do argumento
      * @throws br.ufla.lemaf.ti.lemaf4j.common.ConstraintViolationException
      * Quando o argumento não é válido
      */
-    void assertValid(String name, B value);
+    void assertValid(B value);
 
     /**
      * Confere se o valor dado é um endereço válido

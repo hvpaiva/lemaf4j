@@ -111,7 +111,7 @@ public class EmailConverterTest {
             assertThat(ex.getCause()).isNotNull();
             assertThat(ex.getCause().getCause()).isNotNull();
             assertThat(ex.getCause().getCause().getMessage())
-                    .isEqualTo("O argumento 'emailAddress' não é válido: 'e@'");
+                    .isEqualTo("EmailError: EMAIL INVALIDO 'e@'");
         }
 
     }

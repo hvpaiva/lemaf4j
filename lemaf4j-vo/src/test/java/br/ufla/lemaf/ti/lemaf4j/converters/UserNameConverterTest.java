@@ -100,7 +100,7 @@ public class UserNameConverterTest {
             assertThat(ex.getCause()).isNotNull();
             assertThat(ex.getCause().getCause()).isNotNull();
             assertThat(ex.getCause().getCause().getMessage())
-                    .isEqualTo("O argumento 'userName' não é válido: 'e@'");
+                    .isEqualTo("UserNameError: USERNAME INVALIDO 'e@'");
         }
 
     }

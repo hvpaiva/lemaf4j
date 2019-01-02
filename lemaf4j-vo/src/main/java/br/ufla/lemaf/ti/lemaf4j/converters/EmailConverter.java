@@ -2,8 +2,9 @@ package br.ufla.lemaf.ti.lemaf4j.converters;
 
 import br.ufla.lemaf.ti.lemaf4j.AbstractValueObjectConverter;
 import br.ufla.lemaf.ti.lemaf4j.common.ConstraintViolationException;
-import br.ufla.lemaf.ti.lemaf4j.utils.Error;
-import br.ufla.lemaf.ti.lemaf4j.utils.ErrorMessageFactory;
+import br.ufla.lemaf.ti.lemaf4j.common.errors.EmailError;
+import br.ufla.lemaf.ti.lemaf4j.common.messaging.MessageProducer;
+import br.ufla.lemaf.ti.lemaf4j.common.messaging.SimpleMessageProducer;
 import br.ufla.lemaf.ti.lemaf4j.validators.EmailValidator;
 import br.ufla.lemaf.ti.lemaf4j.vo.Email;
 
@@ -25,13 +26,27 @@ public class EmailConverter
         extends AbstractValueObjectConverter<String, Email> {
 
     private EmailValidator validator;
+    private static MessageProducer producer;
+
+    /**
+     * Construtor de EmailConverter.
+     * Injeta a dependência de EmailAddressValidador, e
+     * usa um producer personalizado.
+     *
+     * @param messageProducer O producer de mensagem
+     */
+    public EmailConverter(MessageProducer messageProducer) {
+        setProducer(messageProducer);
+        this.validator = new EmailValidator();
+    }
 
     /**
      * Construtor padrão do EmailConverter.
-     * Injeta a dependência de EmailAddressValidador.
+     * Injeta a dependência de EmailAddressValidador, e
+     * cria o SimpleMessageProducer como padrão.
      */
     public EmailConverter() {
-        this.validator = new EmailValidator();
+        this(new SimpleMessageProducer());
     }
 
     /**
@@ -93,7 +108,9 @@ public class EmailConverter
 
             if (addr.length != 1) {
                 throw new ConstraintViolationException(
-                        ErrorMessageFactory.of(Error.MULTIPLE_EMAIL, trimmedLowerCaseValue)
+                        producer
+                                .messageOf(EmailError.MULTIPLOS_EMAILS, value)
+                                .message()
                 );
             }
             return addr[0];
@@ -101,10 +118,20 @@ public class EmailConverter
         } catch (final AddressException ex) {
 
             throw new ConstraintViolationException(
-                    ErrorMessageFactory.of(Error.INVALID_EMAIL, trimmedLowerCaseValue)
+                    producer
+                            .messageOf(EmailError.EMAIL_INVALIDO, value)
+                            .message()
             );
         }
 
     }
 
+    /**
+     * Setter static de producer.
+     *
+     * @param producer O producer
+     */
+    public static void setProducer(MessageProducer producer) {
+        EmailConverter.producer = producer;
+    }
 }

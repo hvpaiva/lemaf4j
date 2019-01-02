@@ -61,7 +61,7 @@ public class CPFFormatterTest {
             fail("Expected an exception");
         } catch (final IllegalArgumentException ex) {
             assertThat(ex.getMessage())
-                    .isEqualTo("O argumento 'CPF' não pode ser nulo!");
+                    .isEqualTo("Argument can't be null!");
         }
     }
 

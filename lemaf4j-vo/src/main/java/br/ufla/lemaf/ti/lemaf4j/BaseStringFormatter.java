@@ -23,6 +23,8 @@ public class BaseStringFormatter implements Formatter<String> {
 
     /**
      * Construtor padrão para o BaseStringFormatter.
+     * Criará um SimpleMesageProducer para as mensagens
+     * de erro.
      *
      * @param formatted              O padrão formatado
      * @param formattedReplacement   String contendo a base formatada para
@@ -106,7 +108,7 @@ public class BaseStringFormatter implements Formatter<String> {
 
         } else {
             throw new IllegalArgumentException(
-                    Error.NAO_FORMATADO.message()
+                    "Invalid format. Impossible to format!"
             );
         }
 
@@ -122,7 +124,7 @@ public class BaseStringFormatter implements Formatter<String> {
     private void assetNotNull(String value) {
         if (value == null)
             throw new IllegalArgumentException(
-                    ErrorMessageFactory.of(Error.ARGUMENTO_NULO, "CPF")
+                    "Argument can't be null!"
             );
     }
 }

@@ -9,5 +9,5 @@ import br.ufla.lemaf.ti.lemaf4j.common.messaging.ErrorType;
  * @since 1.0
  */
 public enum EmailError implements ErrorType {
-    EMAIL_INVALIDO
+    EMAIL_INVALIDO, MULTIPLOS_EMAILS
 }

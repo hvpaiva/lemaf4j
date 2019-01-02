@@ -42,7 +42,7 @@ public final class Email extends AbstractStringValueObject {
         super();
         Contract.requireArgNotEmpty("emailAddress", emailAddress);
 
-        validator.assertValid("emailAddress", emailAddress);
+        validator.assertValid(emailAddress);
 
         this.emailStr = EmailConverter.toInternetAddress(emailAddress);
     }

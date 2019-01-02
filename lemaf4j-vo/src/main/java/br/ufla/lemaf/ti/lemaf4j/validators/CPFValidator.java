@@ -2,11 +2,13 @@ package br.ufla.lemaf.ti.lemaf4j.validators;
 
 import br.ufla.lemaf.ti.lemaf4j.ValueObjectValidator;
 import br.ufla.lemaf.ti.lemaf4j.common.ConstraintViolationException;
+import br.ufla.lemaf.ti.lemaf4j.common.errors.CPFError;
+import br.ufla.lemaf.ti.lemaf4j.common.messaging.MessageProducer;
+import br.ufla.lemaf.ti.lemaf4j.common.messaging.SimpleMessageProducer;
+import br.ufla.lemaf.ti.lemaf4j.common.messaging.ValidationMessage;
 import br.ufla.lemaf.ti.lemaf4j.formatters.CPFFormatter;
 import br.ufla.lemaf.ti.lemaf4j.utils.DigitoPara;
-import br.ufla.lemaf.ti.lemaf4j.utils.Error;
-import br.ufla.lemaf.ti.lemaf4j.utils.ErrorMessageFactory;
-import br.ufla.lemaf.ti.lemaf4j.utils.ValidationMessage;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -22,29 +24,37 @@ public final class CPFValidator implements ValueObjectValidator<String> {
 
     private static CPFFormatter formatter = new CPFFormatter();
 
-    private static final Integer CPF_LENGTH_UNFORMATTED = 11;
-    private static final Integer CPF_LENGTH_FORMATTED = 14;
+
+    private final MessageProducer messageProducer;
 
     /**
-     * {@inheritDoc}
+     * Construtor padrão de validador de CPF.
+     * Este utiliza, por padrão, um {@linkplain SimpleMessageProducer}
+     * para geração de mensagens.
      */
-    @Override
-    public void assertValid(@NotNull final String name,
-                            @NotNull final String valor) {
-        if (!isValid(valor))
-            throw new ConstraintViolationException(
-                    ErrorMessageFactory.of(Error.ARGUMENTO_INVALIDO, name, valor)
-            );
+    public CPFValidator() {
+        this(new SimpleMessageProducer());
     }
 
     /**
-     * Confere so o valor do CPF é válido, lançando exceção
-     * {@link ConstraintViolationException} se não for.
+     * Construtor do Validador de CPF.
      *
-     * @param valor O valor a se validar
+     * @param messageProducer produtor de mensagem de erro
      */
-    public void assertValid(@NotNull final String valor) {
-        assertValid("CPF", valor);
+    public CPFValidator(MessageProducer messageProducer) {
+        this.messageProducer = messageProducer;
+    }
+
+    /**
+     * O CPF sem seus dígitos verificadores e desformatado.
+     *
+     * @param cpf O CPF
+     * @return O CPF sem os dígitos
+     */
+    private static String cpfSemDigitosVerificadores(final String cpf) {
+        var cpfDesformatado = formatter.unformat(cpf);
+
+        return cpfDesformatado.substring(0, cpfDesformatado.length() - 2);
     }
 
     /**
@@ -56,57 +66,15 @@ public final class CPFValidator implements ValueObjectValidator<String> {
     }
 
     /**
-     * Valida o CPF e retorna uma lista de erros.
+     * Retorna os dígitos verificadores de um CPF.
      *
-     * @param cpf O CPF a se validar
-     * @return Uma lista de erros de CPF
+     * @param cpf O CPF
+     * @return Os dígitos verificadores
      */
-    public List<ValidationMessage> invalidMessagesFor(String cpf) {
-        List<ValidationMessage> errors = new ArrayList<>();
-        if (cpf == null
-                || cpf.isEmpty()
-                || cpf.length() < CPF_LENGTH_UNFORMATTED
-                || cpf.length() > CPF_LENGTH_FORMATTED) {
-            errors.add(
-                Error.ARGUMENTO_INVALIDO
-            );
+    private static String digitosVerificadoresDe(String cpf) {
+        var cpfDesformatado = formatter.unformat(cpf);
 
-        } else {
-
-
-            if (!formatter.isFormatted(cpf) && !formatter.isNotFormatted(cpf))
-                errors.add(Error.INVALID_CPF_FORMAT);
-
-            String unformattedCPF;
-            if (formatter.isFormatted(cpf)) {
-
-                unformattedCPF = formatter.unformat(cpf);
-
-            } else {
-
-                unformattedCPF = cpf;
-
-            }
-
-            if (unformattedCPF.length() != CPF_LENGTH_UNFORMATTED
-                    || !unformattedCPF.matches("[0-9]*"))
-                errors.add(Error.INVALID_CPF_DIGITS);
-
-            if (hasAllRepeatedDigits(unformattedCPF))
-                errors.add(Error.REPEATED_CPF_DIGITS);
-
-            var cpfSemDigito = unformattedCPF.substring(0, unformattedCPF.length() - 2);
-            var digitos = unformattedCPF.substring(unformattedCPF.length() - 2);
-
-            var digitosCalculados = calculaDigitos(cpfSemDigito);
-
-            if (!digitos.equals(digitosCalculados))
-                errors.add(Error.INVALID_CPF_CHECK_DIGITS);
-
-        }
-
-        return errors;
-
+        return cpfDesformatado.substring(cpfDesformatado.length() - 2);
     }
 
     private static final Integer MULTIPLICADOR_INICIAL_DIGITO_CPF = 2;
@@ -145,6 +113,52 @@ public final class CPFValidator implements ValueObjectValidator<String> {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void assertValid(@NotNull final String valor) {
+        if (!isValid(valor))
+            throw new ConstraintViolationException(
+                    messageProducer
+                            .messageOf(CPFError.CPF_INVALIDO, valor)
+                            .toString()
+            );
+    }
+
+    /**
+     * Valida o CPF e retorna uma lista de erros.
+     *
+     * @param cpf O CPF a se validar
+     * @return Uma lista de erros de CPF
+     */
+    public String invalidMessagesFor(String cpf) {
+        List<ValidationMessage> errors = new ArrayList<>();
+        if (cpf == null || cpf.isEmpty()) {
+            errors.add(messageProducer.messageOf(CPFError.DIGITOS_INVALIDOS));
+
+        } else {
+
+            if (!formatter.isFormatted(cpf) && !formatter.isNotFormatted(cpf)) {
+                errors.add(messageProducer.messageOf(CPFError.FORMATO_INVALIDO));
+
+            } else {
+
+                if (hasAllRepeatedDigits(cpf))
+                    errors.add(messageProducer.messageOf(CPFError.DIGITOS_REPETIDOS));
+
+                var digitosCalculados = calculaDigitos(cpfSemDigitosVerificadores(cpf));
+                var digitos = digitosVerificadoresDe(cpf);
+                if (!digitos.equals(digitosCalculados))
+                    errors.add(messageProducer.messageOf(CPFError.DIGITOS_VERIFICADORES_INVALIDOS));
+            }
+
+        }
+
+        return StringUtils.join(errors, "; \n");
+
+    }
+
+    /**
      * Confere se o CPF possui dígitos repetidos.
      *
      * @param cpf A string de CPF.
@@ -152,8 +166,10 @@ public final class CPFValidator implements ValueObjectValidator<String> {
      * forem repetidos
      */
     private boolean hasAllRepeatedDigits(String cpf) {
-        for (int i = 1; i < cpf.length(); i++) {
-            if (cpf.charAt(i) != cpf.charAt(0)) {
+        var cpfDesformatado = formatter.unformat(cpf);
+
+        for (int i = 1; i < cpfDesformatado.length(); i++) {
+            if (cpfDesformatado.charAt(i) != cpfDesformatado.charAt(0)) {
                 return false;
             }
         }

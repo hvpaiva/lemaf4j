@@ -1,16 +1,14 @@
 package br.ufla.lemaf.ti.lemaf4j.converters;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.fuin.utils4j.JaxbUtils.XML_PREFIX;
-import static org.fuin.utils4j.JaxbUtils.marshal;
-import static org.fuin.utils4j.JaxbUtils.unmarshal;
-import static org.junit.Assert.fail;
-
 import br.ufla.lemaf.ti.lemaf4j.helpers.Data;
 import br.ufla.lemaf.ti.lemaf4j.vo.CPF;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.fuin.utils4j.JaxbUtils.*;
+import static org.junit.Assert.fail;
 
 public class CPFConverterTest {
 
@@ -108,7 +106,7 @@ public class CPFConverterTest {
             assertThat(ex.getCause()).isNotNull();
             assertThat(ex.getCause().getCause()).isNotNull();
             assertThat(ex.getCause().getCause().getMessage())
-                    .isEqualTo("O argumento 'CPF' não é válido: '0000000'");
+                    .isEqualTo("CPFError: CPF INVALIDO '0000000'");
         }
 
     }

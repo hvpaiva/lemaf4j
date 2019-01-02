@@ -1,5 +1,7 @@
 package br.ufla.lemaf.ti.lemaf4j.common.messaging;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Locale;
 
 /**
@@ -64,9 +66,11 @@ interface BaseMessageProducer extends MessageProducer {
      * @return A mensagem de erro
      */
     default String gerarMensagemSimples(String messageKey) {
-        return messageKey
-                .replaceFirst("[.]", ": ")
-                .replaceAll("_", " ");
+        return StringUtils.capitalize(
+                messageKey
+                        .replaceFirst("[.]", ": ")
+                        .replaceAll("_", " ")
+        );
     }
 
 }

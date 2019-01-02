@@ -1,9 +1,9 @@
 package br.ufla.lemaf.ti.lemaf4j.vo;
 
-import br.ufla.lemaf.ti.lemaf4j.converters.UserNameConverter;
-import br.ufla.lemaf.ti.lemaf4j.common.Contract;
-import br.ufla.lemaf.ti.lemaf4j.validators.UserNameValidator;
 import br.ufla.lemaf.ti.lemaf4j.AbstractStringValueObject;
+import br.ufla.lemaf.ti.lemaf4j.common.Contract;
+import br.ufla.lemaf.ti.lemaf4j.converters.UserNameConverter;
+import br.ufla.lemaf.ti.lemaf4j.validators.UserNameValidator;
 
 import javax.annotation.concurrent.Immutable;
 import javax.validation.constraints.NotNull;
@@ -45,7 +45,7 @@ public final class UserName extends AbstractStringValueObject {
         super();
         Contract.requireArgNotNull("userName", userName);
 
-        validator.assertValid("userName", userName);
+        validator.assertValid(userName);
 
         this.str = userName.trim().toLowerCase();
     }

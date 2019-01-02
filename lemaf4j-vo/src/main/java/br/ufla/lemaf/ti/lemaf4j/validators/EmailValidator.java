@@ -2,8 +2,9 @@ package br.ufla.lemaf.ti.lemaf4j.validators;
 
 import br.ufla.lemaf.ti.lemaf4j.ValueObjectValidator;
 import br.ufla.lemaf.ti.lemaf4j.common.ConstraintViolationException;
-import br.ufla.lemaf.ti.lemaf4j.utils.Error;
-import br.ufla.lemaf.ti.lemaf4j.utils.ErrorMessageFactory;
+import br.ufla.lemaf.ti.lemaf4j.common.errors.EmailError;
+import br.ufla.lemaf.ti.lemaf4j.common.messaging.MessageProducer;
+import br.ufla.lemaf.ti.lemaf4j.common.messaging.SimpleMessageProducer;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -17,28 +18,39 @@ import javax.validation.constraints.NotNull;
  */
 public final class EmailValidator implements ValueObjectValidator<String> {
 
+    private final MessageProducer messageProducer;
+
+    /**
+     * Construtor padrão de validador de Email.
+     * Este utiliza, por padrão, um {@linkplain SimpleMessageProducer}
+     * para geração de mensagens.
+     */
+    public EmailValidator() {
+        this(new SimpleMessageProducer());
+    }
+
+    /**
+     * Construtor do Validador de Email.
+     *
+     * @param messageProducer produtor de mensagem de erro
+     */
+    public EmailValidator(MessageProducer messageProducer) {
+        this.messageProducer = messageProducer;
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public void assertValid(@NotNull final String name,
-                            @NotNull final String value) {
+    public void assertValid(@NotNull final String value) {
 
         if (!isValid(value)) {
             throw new ConstraintViolationException(
-                    ErrorMessageFactory.of(Error.ARGUMENTO_INVALIDO, name, value)
+                    messageProducer
+                            .messageOf(EmailError.EMAIL_INVALIDO, value)
+                            .toString()
             );
         }
-    }
-
-    /**
-     * Confere so o valor do Email é válido, lançando exceção
-     * {@link ConstraintViolationException} se não for.
-     *
-     * @param valor O valor a se validar
-     */
-    public void assertValid(@NotNull final String valor) {
-        assertValid("Email", valor);
     }
 
     /**

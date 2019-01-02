@@ -1,5 +1,7 @@
 package br.ufla.lemaf.ti.lemaf4j.common.messaging;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * SimpleMessageProducer é responsável pela
  * geração de mensagens de erro.
@@ -23,5 +25,19 @@ public class SimpleMessageProducer implements BaseMessageProducer {
         var key = messageKeyFor(errorType);
 
         return new ErrorMessage(gerarMensagemSimples(key));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ValidationMessage messageOf(ErrorType errorType, Object... args) {
+        var key = messageKeyFor(errorType);
+        var messageSimples = gerarMensagemSimples(key);
+        var argumentos = StringUtils.join(args, ", ");
+
+        var message = messageSimples + " '" + argumentos + "'";
+
+        return new ErrorMessage(message);
     }
 }

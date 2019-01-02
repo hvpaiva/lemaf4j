@@ -57,17 +57,17 @@ public class EmailValidatorTest {
     public final void shouldThrowRightErrorMessage() {
 
         try {
-            validatorToTest.assertValid("a", "");
+            validatorToTest.assertValid("");
             fail();
         } catch (final ConstraintViolationException ex) {
-            assertThat(ex.getMessage()).isEqualTo("O argumento 'a' não é válido: ''");
+            assertThat(ex.getMessage()).isEqualTo("EmailError: EMAIL INVALIDO ''");
         }
 
         try {
             validatorToTest.assertValid("abc@");
             fail();
         } catch (final ConstraintViolationException ex) {
-            assertThat(ex.getMessage()).isEqualTo("O argumento 'Email' não é válido: 'abc@'");
+            assertThat(ex.getMessage()).isEqualTo("EmailError: EMAIL INVALIDO 'abc@'");
         }
 
     }

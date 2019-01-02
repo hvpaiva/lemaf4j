@@ -1,8 +1,5 @@
 package br.ufla.lemaf.ti.lemaf4j;
 
-import br.ufla.lemaf.ti.lemaf4j.utils.Error;
-import br.ufla.lemaf.ti.lemaf4j.utils.ErrorMessageFactory;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

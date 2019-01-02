@@ -70,17 +70,17 @@ public class UserNameValidatorTest {
     public final void shouldThrowRightErrorMessage() {
 
         try {
-            validatorToTest.assertValid("a", "");
+            validatorToTest.assertValid("");
             fail();
         } catch (final ConstraintViolationException ex) {
-            assertThat(ex.getMessage()).isEqualTo("O argumento 'a' não é válido: ''");
+            assertThat(ex.getMessage()).isEqualTo("UserNameError: USERNAME INVALIDO ''");
         }
 
         try {
             validatorToTest.assertValid("abc@");
             fail();
         } catch (final ConstraintViolationException ex) {
-            assertThat(ex.getMessage()).isEqualTo("O argumento 'Username' não é válido: 'abc@'");
+            assertThat(ex.getMessage()).isEqualTo("UserNameError: USERNAME INVALIDO 'abc@'");
         }
 
     }

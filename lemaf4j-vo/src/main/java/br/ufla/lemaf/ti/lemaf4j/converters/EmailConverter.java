@@ -2,8 +2,6 @@ package br.ufla.lemaf.ti.lemaf4j.converters;
 
 import br.ufla.lemaf.ti.lemaf4j.AbstractValueObjectConverter;
 import br.ufla.lemaf.ti.lemaf4j.common.ConstraintViolationException;
-import br.ufla.lemaf.ti.lemaf4j.utils.Error;
-import br.ufla.lemaf.ti.lemaf4j.utils.ErrorMessageFactory;
 import br.ufla.lemaf.ti.lemaf4j.validators.EmailValidator;
 import br.ufla.lemaf.ti.lemaf4j.vo.Email;
 

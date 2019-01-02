@@ -79,6 +79,7 @@ public class ResourceBundleMessageProducer implements BaseMessageProducer {
      * @param args      Os argumentos para a mensagem
      * @return A mensagem
      */
+    @Override
     public ValidationMessage messageOf(ErrorType errorType, Object... args) {
         var message = messageOf(errorType).message();
 

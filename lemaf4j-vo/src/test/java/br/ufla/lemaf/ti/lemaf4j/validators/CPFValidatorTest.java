@@ -1,13 +1,11 @@
 package br.ufla.lemaf.ti.lemaf4j.validators;
 
 import br.ufla.lemaf.ti.lemaf4j.common.ConstraintViolationException;
-import br.ufla.lemaf.ti.lemaf4j.common.messaging.ValidationMessage;
-import br.ufla.lemaf.ti.lemaf4j.utils.Error;
+import br.ufla.lemaf.ti.lemaf4j.common.errors.CPFError;
+import br.ufla.lemaf.ti.lemaf4j.common.messaging.SimpleMessageProducer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 import static junit.framework.TestCase.fail;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -107,17 +105,17 @@ public class CPFValidatorTest {
     public final void shouldThrowRightErrorMessage() {
 
         try {
-            validatorToTest.assertValid("a", "");
+            validatorToTest.assertValid("");
             fail();
         } catch (final ConstraintViolationException ex) {
-            assertThat(ex.getMessage()).isEqualTo("O argumento 'a' não é válido: ''");
+            assertThat(ex.getMessage()).isEqualTo("CPFError: CPF INVALIDO ''");
         }
 
         try {
             validatorToTest.assertValid("11111111");
             fail();
         } catch (final ConstraintViolationException ex) {
-            assertThat(ex.getMessage()).isEqualTo("O argumento 'CPF' não é válido: '11111111'");
+            assertThat(ex.getMessage()).isEqualTo("CPFError: CPF INVALIDO '11111111'");
         }
 
     }
@@ -125,19 +123,16 @@ public class CPFValidatorTest {
     //TODO - testar mensagens de erro (Pulado pois acho que vou trocar como as mensagens funcionam)
     @Test
     public void testValidationMessage() {
-        var argInvalido = new ArrayList<ValidationMessage>();
-        argInvalido.add(Error.ARGUMENTO_INVALIDO);
+        var messageProducer = new SimpleMessageProducer();
 
-        var multipleErrors = new ArrayList<ValidationMessage>();
-        multipleErrors.add(Error.INVALID_CPF_FORMAT);
-        multipleErrors.add(Error.INVALID_CPF_DIGITS);
-        multipleErrors.add(Error.INVALID_CPF_CHECK_DIGITS);
+        var digitoInvalido = messageProducer.messageOf(CPFError.DIGITOS_INVALIDOS).message();
+        var formatoInvalido = messageProducer.messageOf(CPFError.FORMATO_INVALIDO).message();
+        var repeatedDigits = messageProducer.messageOf(CPFError.DIGITOS_REPETIDOS).message();
+        var cpfInvalido = messageProducer.messageOf(CPFError.DIGITOS_VERIFICADORES_INVALIDOS).message();
 
-        var repeatedDigits = new ArrayList<ValidationMessage>();
-        repeatedDigits.add(Error.REPEATED_CPF_DIGITS);
-
-        assertThat(validatorToTest.invalidMessagesFor("")).isEqualTo(argInvalido);
-        assertThat(validatorToTest.invalidMessagesFor("abcdefghijk")).isEqualTo(multipleErrors);
+        assertThat(validatorToTest.invalidMessagesFor("")).isEqualTo(digitoInvalido);
+        assertThat(validatorToTest.invalidMessagesFor("abcdefghijk")).isEqualTo(formatoInvalido);
         assertThat(validatorToTest.invalidMessagesFor("00000000000")).isEqualTo(repeatedDigits);
+        assertThat(validatorToTest.invalidMessagesFor("11458201666")).isEqualTo(cpfInvalido);
     }
 }

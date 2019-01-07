@@ -1,8 +1,17 @@
 # LEMAF4J
 
-[![build status](http://gitlab.ti.lemaf.ufla.br/devops/lemaf4j/badges/master/build.svg)](http://gitlab.ti.lemaf.ufla.br/devops/lemaf4j/commits/master)
+[![Build Status](https://travis-ci.org/hvpaiva/lemaf4j.svg?branch=master)](https://travis-ci.org/hvpaiva/lemaf4j)
+[![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hvpaiva/lemaf4j/master/LICENSE.md)
+[![quality gate](https://sonarcloud.io/api/project_badges/measure?project=hvpaiva_lemaf4j&metric=alert_status)](https://sonarcloud.io/dashboard?id=hvpaiva_lemaf4j)
+[![reliability](https://sonarcloud.io/api/project_badges/measure?project=hvpaiva_lemaf4j&metric=reliability_rating)](https://sonarcloud.io/component_measures?id=hvpaiva_lemaf4j&metric=reliability_rating)
+[![security](https://sonarcloud.io/api/project_badges/measure?project=hvpaiva_lemaf4j&metric=security_rating)](https://sonarcloud.io/component_measures?id=hvpaiva_lemaf4j&metric=security_rating)
+[![maintainability](https://sonarcloud.io/api/project_badges/measure?project=hvpaiva_lemaf4j&metric=sqale_rating)](https://sonarcloud.io/component_measures?id=hvpaiva_lemaf4j&metric=sqale_rating)
 
-[![coverage report](http://gitlab.ti.lemaf.ufla.br/devops/lemaf4j/badges/master/coverage.svg)](http://gitlab.ti.lemaf.ufla.br/devops/lemaf4j/commits/master)
+[![bugs](https://sonarcloud.io/api/project_badges/measure?project=hvpaiva_lemaf4j&metric=bugs)](https://sonarcloud.io/component_measures?id=hvpaiva_lemaf4j&metric=Reliability)
+[![code smells](https://sonarcloud.io/api/project_badges/measure?project=hvpaiva_lemaf4j&metric=code_smells)](https://sonarcloud.io/component_measures?id=hvpaiva_lemaf4j&metric=code_smells)
+[![coverage](https://sonarcloud.io/api/project_badges/measure?project=hvpaiva_lemaf4j&metric=coverage)](https://sonarcloud.io/component_measures?id=hvpaiva_lemaf4j&metric=Coverage)
+[![vunerability](https://sonarcloud.io/api/project_badges/measure?project=hvpaiva_lemaf4j&metric=vulnerabilities)](https://sonarcloud.io/component_measures?id=hvpaiva_lemaf4j&metric=vulnerabilities)
+[![duplicated lines](https://sonarcloud.io/api/project_badges/measure?project=hvpaiva_lemaf4j&metric=duplicated_lines_density)](https://sonarcloud.io/component_measures?id=hvpaiva_lemaf4j&metric=duplicated_lines_density)
 
 ---
 

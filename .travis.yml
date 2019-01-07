@@ -13,12 +13,6 @@ install:
 after_success:
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.projectKey=hvpaiva_lemaf4j -Dsonar.organization=hvpaiva-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
 
-# use latest java version available instead of travis default
-addons:
-  apt:
-    packages:
-      - oracle-java11-installer
-
 notifications:
   email:
     - high.v.paiva@gmail.com

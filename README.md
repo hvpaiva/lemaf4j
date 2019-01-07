@@ -1,7 +1,7 @@
 # LEMAF4J
 
 [![Build Status](https://travis-ci.org/hvpaiva/lemaf4j.svg?branch=master)](https://travis-ci.org/hvpaiva/lemaf4j)
-[![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hvpaiva/lemaf4j/master/LICENSE.md)
+[![License Apache](https://img.shields.io/badge/licence-Apache%202.0-blue.svg)](https://github.com/hvpaiva/lemaf4j/blob/master/LICENCE.txt)
 [![quality gate](https://sonarcloud.io/api/project_badges/measure?project=hvpaiva_lemaf4j&metric=alert_status)](https://sonarcloud.io/dashboard?id=hvpaiva_lemaf4j)
 [![reliability](https://sonarcloud.io/api/project_badges/measure?project=hvpaiva_lemaf4j&metric=reliability_rating)](https://sonarcloud.io/component_measures?id=hvpaiva_lemaf4j&metric=reliability_rating)
 [![security](https://sonarcloud.io/api/project_badges/measure?project=hvpaiva_lemaf4j&metric=security_rating)](https://sonarcloud.io/component_measures?id=hvpaiva_lemaf4j&metric=security_rating)

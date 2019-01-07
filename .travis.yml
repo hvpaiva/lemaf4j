@@ -1,0 +1,26 @@
+language: java
+jdk:
+  - oraclejdk11
+
+before_install:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+
+# default install command is just "mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V"
+install:
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V -e
+
+after_success:
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.projectKey=hvpaiva_lemaf4j -Dsonar.organization=hvpaiva-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
+
+# use latest java version available instead of travis default
+addons:
+  apt:
+    packages:
+      - oracle-java11-installer
+
+notifications:
+  email:
+    - high.v.paiva@gmail.com
+
+sudo: required

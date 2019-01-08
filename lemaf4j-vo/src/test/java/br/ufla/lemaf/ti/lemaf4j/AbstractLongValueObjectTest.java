@@ -17,14 +17,6 @@ public class AbstractLongValueObjectTest {
     }
 
     @Test
-    public void testCompareTo() {
-        var testeVO = new TestLongVO(1L);
-        var testeVO2 = new TestLongVO2(1L);
-
-        assertThat(testeVO.compareTo(testeVO2)).isEqualTo(0);
-    }
-
-    @Test
     public void testBaseType() {
         var testeVO = new TestLongVO(1L);
 

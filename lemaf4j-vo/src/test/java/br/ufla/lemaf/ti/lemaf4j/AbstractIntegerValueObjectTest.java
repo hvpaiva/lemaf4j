@@ -17,14 +17,6 @@ public class AbstractIntegerValueObjectTest {
     }
 
     @Test
-    public void testCompareTo() {
-        var testeVO = new TestIntegerVO(1);
-        var testeVO2 = new TestIntegerVO2(1);
-
-        assertThat(testeVO.compareTo(testeVO2)).isEqualTo(0);
-    }
-
-    @Test
     public void testBaseType() {
         var testeVO = new TestIntegerVO(1);
 

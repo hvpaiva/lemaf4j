@@ -17,14 +17,6 @@ public class AbstractStringValueObjectTest {
     }
 
     @Test
-    public void testCompareTo() {
-        var testeVO = new TestStringVO("a");
-        var testeVO2 = new TestStringVO2("a");
-
-        assertThat(testeVO.compareTo(testeVO2)).isEqualTo(0);
-    }
-
-    @Test
     public void testBaseType() {
         var testeVO = new TestStringVO("a");
 

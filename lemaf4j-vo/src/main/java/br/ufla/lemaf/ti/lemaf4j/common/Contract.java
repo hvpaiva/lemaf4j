@@ -21,11 +21,7 @@ public final class Contract {
     /**
      * Construtor privado para evitar instanciação.
      */
-    protected Contract() {
-        throw new UnsupportedOperationException(
-                constructErrorMessage(Error.CLASSE_UTILITARIA_NAO_PODE_SER_INSTANCIADA)
-        );
-    }
+    private Contract() { }
 
     /**
      * Confere se o valor não é <code>null</code>.

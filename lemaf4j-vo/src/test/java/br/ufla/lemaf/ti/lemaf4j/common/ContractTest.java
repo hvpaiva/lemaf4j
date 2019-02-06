@@ -56,11 +56,6 @@ public class ContractTest {
 
     }
 
-    @Test(expected = UnsupportedOperationException.class)
-    public void shouldNotInstantiateUtilityClasses() {
-        new Contract();
-    }
-
     @Test
     public void testRequireArgMaxLength() {
 

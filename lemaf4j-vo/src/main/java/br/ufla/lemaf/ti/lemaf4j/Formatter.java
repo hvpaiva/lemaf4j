@@ -1,7 +1,7 @@
 package br.ufla.lemaf.ti.lemaf4j;
 
 /**
- * A interface Formatter fornece interfaces de
+ * Formatter fornece interfaces de
  * formatação, transformando cadeia de caracteres
  * em formatados ou não.
  *

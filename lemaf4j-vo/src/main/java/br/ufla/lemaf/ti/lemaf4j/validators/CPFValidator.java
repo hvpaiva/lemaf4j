@@ -22,7 +22,7 @@ import java.util.List;
  */
 public final class CPFValidator implements ValueObjectValidator<String> {
 
-    private static CPFFormatter formatter = new CPFFormatter();
+    private final CPFFormatter formatter;
 
 
     private final MessageProducer messageProducer;
@@ -43,6 +43,7 @@ public final class CPFValidator implements ValueObjectValidator<String> {
      */
     public CPFValidator(MessageProducer messageProducer) {
         this.messageProducer = messageProducer;
+        this.formatter = new CPFFormatter();
     }
 
     /**
@@ -51,8 +52,8 @@ public final class CPFValidator implements ValueObjectValidator<String> {
      * @param cpf O CPF
      * @return O CPF sem os dígitos
      */
-    private static String cpfSemDigitosVerificadores(final String cpf) {
-        var cpfDesformatado = formatter.unformat(cpf);
+    private String cpfSemDigitosVerificadores(final String cpf) {
+        var cpfDesformatado = this.formatter.unformat(cpf);
 
         return cpfDesformatado.substring(0, cpfDesformatado.length() - 2);
     }
@@ -71,8 +72,8 @@ public final class CPFValidator implements ValueObjectValidator<String> {
      * @param cpf O CPF
      * @return Os dígitos verificadores
      */
-    private static String digitosVerificadoresDe(String cpf) {
-        var cpfDesformatado = formatter.unformat(cpf);
+    private String digitosVerificadoresDe(String cpf) {
+        var cpfDesformatado = this.formatter.unformat(cpf);
 
         return cpfDesformatado.substring(cpfDesformatado.length() - 2);
     }
@@ -166,7 +167,7 @@ public final class CPFValidator implements ValueObjectValidator<String> {
      * forem repetidos
      */
     private boolean hasAllRepeatedDigits(String cpf) {
-        var cpfDesformatado = formatter.unformat(cpf);
+        var cpfDesformatado = this.formatter.unformat(cpf);
 
         for (int i = 1; i < cpfDesformatado.length(); i++) {
             if (cpfDesformatado.charAt(i) != cpfDesformatado.charAt(0)) {

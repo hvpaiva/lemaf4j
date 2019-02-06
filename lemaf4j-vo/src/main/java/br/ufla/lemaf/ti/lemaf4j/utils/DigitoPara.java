@@ -1,6 +1,13 @@
 package br.ufla.lemaf.ti.lemaf4j.utils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * Uma fluent interface para o cálculo de dígitos, que é usado em diversos
@@ -67,9 +74,9 @@ public class DigitoPara {
      *
      * @param inicio Primeiro número do intervalo sequencial de multiplicadores
      * @param fim    Último número do intervalo sequencial de multiplicadores
-     * @return this
+     * @return this A instância do DigitoPara
      */
-    public DigitoPara comMultiplicadoresDeAte(int inicio, int fim) {
+    public DigitoPara comMultiplicadoresDeAte(final int inicio, final int fim) {
         this.multiplicadores.clear();
         for (int i = inicio; i <= fim; i++) {
             multiplicadores.add(i);
@@ -83,9 +90,9 @@ public class DigitoPara {
      * através de varargs.
      *
      * @param multiplicadoresEmOrdem Sequência de inteiros com os multiplicadores em ordem
-     * @return this
+     * @return this A instância do DigitoPara
      */
-    public DigitoPara comMultiplicadores(Integer... multiplicadoresEmOrdem) {
+    public DigitoPara comMultiplicadores(final Integer... multiplicadoresEmOrdem) {
         this.multiplicadores = Arrays.asList(multiplicadoresEmOrdem);
         return this;
     }
@@ -96,7 +103,7 @@ public class DigitoPara {
      * no método mod para decidir se o resultado devolvido é o módulo puro ou seu
      * complementar.
      *
-     * @return this
+     * @return this A instância do DigitoPara
      */
     public DigitoPara complementarAoModulo() {
         this.complementar = true;
@@ -108,9 +115,9 @@ public class DigitoPara {
      *
      * @param substituto O valor substituto
      * @param i          O valor a se substituir
-     * @return this
+     * @return this A instância do DigitoPara
      */
-    public DigitoPara trocandoPorSeEncontrar(String substituto, Integer... i) {
+    public DigitoPara trocandoPorSeEncontrar(final String substituto, final Integer... i) {
         for (Integer integer : i) {
             substituicoes.put(integer, substituto);
         }
@@ -120,9 +127,9 @@ public class DigitoPara {
     /**
      * @param modulo Inteiro pelo qual o resto será tirado e também seu complementar.
      *               O valor padrão é 11.
-     * @return this
+     * @return this A instância do DigitoPara
      */
-    public DigitoPara mod(Integer modulo) {
+    public DigitoPara mod(final Integer modulo) {
         this.modulo = Objects.requireNonNullElse(modulo, DEFAULT_MODULE);
         return this;
     }
@@ -133,10 +140,21 @@ public class DigitoPara {
      * <p>
      * Ex: 2 X 9 = 18, irá somar 9 (1 + 8) invés de 18 ao total.
      *
-     * @return this
+     * @return this A instância do DigitoPara
      */
     public DigitoPara somandoIndividualmente() {
         this.somarIndividual = true;
+        return this;
+    }
+
+    /**
+     * Adiciona um dígito ao início do trecho numérico.
+     *
+     * @param digito É o dígito a ser adicionado.
+     * @return this A instância do DigitoPara
+     */
+    public DigitoPara addDigito(final String digito) {
+        this.numero.addFirst(Integer.valueOf(digito));
         return this;
     }
 
@@ -149,11 +167,12 @@ public class DigitoPara {
     public String calcula() {
         int soma = 0;
         int multiplicadorDaVez = 0;
+
         for (int algarismo : numero) {
             int multiplicador = multiplicadores.get(multiplicadorDaVez);
             int total = algarismo * multiplicador;
             soma += somarIndividual ? somaDigitos(total) : total;
-            multiplicadorDaVez = proximoMultiplicador(multiplicadorDaVez);
+            multiplicadorDaVez = proximoIndiceMultiplicador(multiplicadorDaVez);
         }
         int resultado = soma % modulo;
         if (complementar)
@@ -165,6 +184,8 @@ public class DigitoPara {
         return String.valueOf(resultado);
     }
 
+    //- Calculos internos
+
     private static final Integer DIVISOR_DEZ = 10;
 
     /**
@@ -174,7 +195,7 @@ public class DigitoPara {
      * @param total O numero a ser somado
      * @return A soma dos caracteres do numero
      */
-    private int somaDigitos(int total) {
+    private int somaDigitos(final int total) {
         return total / DIVISOR_DEZ + total % DIVISOR_DEZ;
     }
 
@@ -185,21 +206,9 @@ public class DigitoPara {
      * @param multiplicadorDaVez Essa é a posição do último multiplicador usado.
      * @return próximo multiplicador
      */
-    private int proximoMultiplicador(int multiplicadorDaVez) {
-        multiplicadorDaVez++;
-        if (multiplicadorDaVez == multiplicadores.size())
-            multiplicadorDaVez = 0;
-        return multiplicadorDaVez;
-    }
-
-    /**
-     * Adiciona um dígito no final do trecho numérico.
-     *
-     * @param digito É o dígito a ser adicionado.
-     * @return this
-     */
-    public DigitoPara addDigito(String digito) {
-        this.numero.addFirst(Integer.valueOf(digito));
-        return this;
+    private int proximoIndiceMultiplicador(final int multiplicadorDaVez) {
+        if (multiplicadorDaVez + 1 == multiplicadores.size())
+            return 0;
+        return multiplicadorDaVez + 1;
     }
 }

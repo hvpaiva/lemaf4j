@@ -30,13 +30,6 @@ public final class CPF extends AbstractStringValueObject implements Formattable<
     private String codigo;
 
     /**
-     * Construtor protected para deserialização.
-     */
-    protected CPF() {
-        super();
-    }
-
-    /**
      * Construtor padrão contendo o código do CPF.
      *
      * @param codigoCpf o código do CPF
@@ -48,11 +41,7 @@ public final class CPF extends AbstractStringValueObject implements Formattable<
 
         validator.assertValid(codigoCpf);
 
-        if (formatter.isFormatted(codigoCpf)) {
-            this.codigo = formatter.unformat(codigoCpf);
-        } else {
-            this.codigo = codigoCpf;
-        }
+        this.codigo = formatter.unformat(codigoCpf);
     }
 
     /**

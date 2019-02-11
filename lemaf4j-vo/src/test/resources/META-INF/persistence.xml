@@ -13,6 +13,7 @@
         <class>br.ufla.lemaf.ti.lemaf4j.helpers.CPFParentEntity</class>
         <class>br.ufla.lemaf.ti.lemaf4j.helpers.EmailsParentEntity</class>
         <class>br.ufla.lemaf.ti.lemaf4j.helpers.UserNameParentEntity</class>
+        <class>br.ufla.lemaf.ti.lemaf4j.helpers.CNPJParentEntity</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>

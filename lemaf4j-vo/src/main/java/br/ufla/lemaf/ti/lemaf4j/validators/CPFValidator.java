@@ -1,6 +1,7 @@
 package br.ufla.lemaf.ti.lemaf4j.validators;
 
 import br.ufla.lemaf.ti.lemaf4j.ValueObjectValidator;
+import br.ufla.lemaf.ti.lemaf4j.common.CadastroPessoa;
 import br.ufla.lemaf.ti.lemaf4j.common.ConstraintViolationException;
 import br.ufla.lemaf.ti.lemaf4j.common.errors.CPFError;
 import br.ufla.lemaf.ti.lemaf4j.common.messaging.MessageProducer;
@@ -20,7 +21,7 @@ import java.util.List;
  * @author Highlander Paiva
  * @since 1.0
  */
-public final class CPFValidator implements ValueObjectValidator<String> {
+public final class CPFValidator implements ValueObjectValidator<String>, CadastroPessoa {
 
     private final CPFFormatter formatter;
 
@@ -47,18 +48,6 @@ public final class CPFValidator implements ValueObjectValidator<String> {
     }
 
     /**
-     * O CPF sem seus dígitos verificadores e desformatado.
-     *
-     * @param cpf O CPF
-     * @return O CPF sem os dígitos
-     */
-    private String cpfSemDigitosVerificadores(final String cpf) {
-        var cpfDesformatado = this.formatter.unformat(cpf);
-
-        return cpfDesformatado.substring(0, cpfDesformatado.length() - 2);
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -67,16 +56,19 @@ public final class CPFValidator implements ValueObjectValidator<String> {
     }
 
     /**
-     * Retorna os dígitos verificadores de um CPF.
-     *
-     * @param cpf O CPF
-     * @return Os dígitos verificadores
+     * {@inheritDoc}
      */
-    private String digitosVerificadoresDe(String cpf) {
-        var cpfDesformatado = this.formatter.unformat(cpf);
-
-        return cpfDesformatado.substring(cpfDesformatado.length() - 2);
+    @Override
+    public void assertValid(@NotNull final String valor) {
+        if (!isValid(valor))
+            throw new ConstraintViolationException(
+                    messageProducer
+                            .messageOf(CPFError.CPF_INVALIDO, valor)
+                            .toString()
+            );
     }
+
+    // - Calculos internos
 
     private static final Integer MULTIPLICADOR_INICIAL_DIGITO_CPF = 2;
     private static final Integer MULTIPLICADOR_FINAL_DIGITO_CPF = 11;
@@ -114,19 +106,6 @@ public final class CPFValidator implements ValueObjectValidator<String> {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void assertValid(@NotNull final String valor) {
-        if (!isValid(valor))
-            throw new ConstraintViolationException(
-                    messageProducer
-                            .messageOf(CPFError.CPF_INVALIDO, valor)
-                            .toString()
-            );
-    }
-
-    /**
      * Valida o CPF e retorna uma lista de erros.
      *
      * @param cpf O CPF a se validar
@@ -144,11 +123,11 @@ public final class CPFValidator implements ValueObjectValidator<String> {
 
             } else {
 
-                if (hasAllRepeatedDigits(cpf))
+                if (hasAllRepeatedDigits(cpf, this.formatter))
                     errors.add(messageProducer.messageOf(CPFError.DIGITOS_REPETIDOS));
 
-                var digitosCalculados = calculaDigitos(cpfSemDigitosVerificadores(cpf));
-                var digitos = digitosVerificadoresDe(cpf);
+                var digitosCalculados = calculaDigitos(semDigitosVerificadores(cpf, this.formatter));
+                var digitos = digitosVerificadoresDe(cpf, this.formatter);
                 if (!digitos.equals(digitosCalculados))
                     errors.add(messageProducer.messageOf(CPFError.DIGITOS_VERIFICADORES_INVALIDOS));
             }
@@ -157,23 +136,5 @@ public final class CPFValidator implements ValueObjectValidator<String> {
 
         return StringUtils.join(errors, "; \n");
 
-    }
-
-    /**
-     * Confere se o CPF possui dígitos repetidos.
-     *
-     * @param cpf A string de CPF.
-     * @return <code>true</code> se todos os dígitos
-     * forem repetidos
-     */
-    private boolean hasAllRepeatedDigits(String cpf) {
-        var cpfDesformatado = this.formatter.unformat(cpf);
-
-        for (int i = 1; i < cpfDesformatado.length(); i++) {
-            if (cpfDesformatado.charAt(i) != cpfDesformatado.charAt(0)) {
-                return false;
-            }
-        }
-        return true;
     }
 }

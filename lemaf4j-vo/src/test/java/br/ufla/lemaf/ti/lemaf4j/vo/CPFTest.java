@@ -1,14 +1,13 @@
 package br.ufla.lemaf.ti.lemaf4j.vo;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.fuin.utils4j.Utils4J.deserialize;
-import static org.fuin.utils4j.Utils4J.serialize;
-
-import br.ufla.lemaf.ti.lemaf4j.helpers.CPFParentEntity;
 import br.ufla.lemaf.ti.lemaf4j.common.ConstraintViolationException;
+import br.ufla.lemaf.ti.lemaf4j.helpers.CPFParentEntity;
 import org.fuin.units4j.AbstractPersistenceTest;
 import org.junit.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.fuin.utils4j.Utils4J.deserialize;
+import static org.fuin.utils4j.Utils4J.serialize;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -20,11 +19,6 @@ public class CPFTest extends AbstractPersistenceTest {
         final CPF original = new CPF(cpf);
         final CPF copy = deserialize(serialize(original));
         assertThat(original).isEqualTo(copy);
-    }
-
-    @Test
-    public void shouldNotInstantiateDefaultVOClasses() {
-        new CPF();
     }
 
     @Test

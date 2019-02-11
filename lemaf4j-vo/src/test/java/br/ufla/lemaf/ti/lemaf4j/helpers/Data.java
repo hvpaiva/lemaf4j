@@ -1,5 +1,6 @@
 package br.ufla.lemaf.ti.lemaf4j.helpers;
 
+import br.ufla.lemaf.ti.lemaf4j.vo.CNPJ;
 import br.ufla.lemaf.ti.lemaf4j.vo.CPF;
 import br.ufla.lemaf.ti.lemaf4j.vo.Email;
 import br.ufla.lemaf.ti.lemaf4j.vo.UserName;
@@ -22,5 +23,9 @@ public class Data {
     @Valid
     @XmlAttribute
     public CPF cpf;
+
+    @Valid
+    @XmlAttribute
+    public CNPJ cnpj;
 
 }

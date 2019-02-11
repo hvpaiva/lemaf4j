@@ -2,12 +2,19 @@ package br.ufla.lemaf.ti.lemaf4j.common;
 
 import br.ufla.lemaf.ti.lemaf4j.Formatter;
 
+/**
+ * Interface compartilhada de CPF/CNPJ.
+ *
+ * @author Highlander Paiva
+ * @since 1.0
+ */
 public interface CadastroPessoa {
 
 	/**
 	 * Confere se o CNPJ/CPF possui dígitos repetidos.
 	 *
 	 * @param cadastro A string de CNPJ/CPF.
+	 * @param formatter O formatador do tipo
 	 * @return <code>true</code> se todos os dígitos
 	 * forem repetidos
 	 */
@@ -26,6 +33,7 @@ public interface CadastroPessoa {
 	 * Retorna os dígitos verificadores de um CNPJ/CPF.
 	 *
 	 * @param cadastro O CNPJ ou CPF
+	 * @param formatter O formatador do tipo
 	 * @return Os dígitos verificadores
 	 */
 	default String digitosVerificadoresDe(final String cadastro, final Formatter<String> formatter) {
@@ -38,6 +46,7 @@ public interface CadastroPessoa {
 	 * O CNPJ/CPF sem seus dígitos verificadores e desformatado.
 	 *
 	 * @param cadastro O CNPJ/CPF
+	 * @param formatter O formatador do tipo
 	 * @return O CNPJ/CPF sem os dígitos
 	 */
 	default String semDigitosVerificadores(final String cadastro, final Formatter<String> formatter) {

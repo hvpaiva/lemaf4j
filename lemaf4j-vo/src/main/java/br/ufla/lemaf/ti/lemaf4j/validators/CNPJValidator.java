@@ -121,8 +121,10 @@ public class CNPJValidator implements ValueObjectValidator<String>, CadastroPess
 
 				var digitosCalculados = calculaDigitos(semDigitosVerificadores(cnpj, this.formatter));
 				var digitos = digitosVerificadoresDe(cnpj, this.formatter);
-				if (!digitos.equals(digitosCalculados))
-					errors.add(messageProducer.messageOf(CNPJError.DIGITOS_VERIFICADORES_INVALIDOS));
+				if (!digitos.equals(digitosCalculados)) {
+					errors.add(messageProducer
+							.messageOf(CNPJError.DIGITOS_VERIFICADORES_INVALIDOS));
+				}
 			}
 
 		}

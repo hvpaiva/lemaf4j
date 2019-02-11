@@ -11,6 +11,12 @@ import javax.annotation.concurrent.Immutable;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+/**
+ * VO de CNPJ.
+ *
+ * @author Highlander Paiva
+ * @since 1.0
+ */
 @Immutable
 @XmlJavaTypeAdapter(CNPJConverter.class)
 public class CNPJ extends AbstractStringValueObject implements Formattable<String> {
@@ -22,6 +28,11 @@ public class CNPJ extends AbstractStringValueObject implements Formattable<Strin
 
 	private String codigo;
 
+	/**
+	 * Construtor padrão de CNPJ.
+	 *
+	 * @param codigoCnpj O código do CNPJ
+	 */
 	public CNPJ(@NotNull final String codigoCnpj) {
 		super();
 		Contract.requireArgNotNull("CNPJ", codigoCnpj);

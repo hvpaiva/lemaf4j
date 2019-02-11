@@ -120,7 +120,6 @@ public class CPFValidatorTest {
 
     }
 
-    //TODO - testar mensagens de erro (Pulado pois acho que vou trocar como as mensagens funcionam)
     @Test
     public void testValidationMessage() {
         var messageProducer = new SimpleMessageProducer();

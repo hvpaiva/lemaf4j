@@ -60,8 +60,8 @@ public class CNPJFormatterTest {
 
 	@Test
 	public final void shouldFormatNonObviousInvalidCNPJ() {
-		assertEquals(formatterToTest.format(INVALID_FORMATTED_CNPJ), INVALID_FORMATTED_CNPJ);
-		assertEquals(formatterToTest.format(INVALID_UNFORMATTED_CNPJ), INVALID_FORMATTED_CNPJ);
+		assertEquals(INVALID_FORMATTED_CNPJ, formatterToTest.format(INVALID_FORMATTED_CNPJ));
+		assertEquals(INVALID_FORMATTED_CNPJ, formatterToTest.format(INVALID_UNFORMATTED_CNPJ));
 
 	}
 
@@ -77,8 +77,8 @@ public class CNPJFormatterTest {
 
 	@Test
 	public final void shouldUnformatNonObviousInvalidCNPJ() {
-		assertEquals(formatterToTest.unformat(INVALID_FORMATTED_CNPJ), INVALID_UNFORMATTED_CNPJ);
-		assertEquals(formatterToTest.unformat(INVALID_UNFORMATTED_CNPJ), INVALID_UNFORMATTED_CNPJ);
+		assertEquals(INVALID_UNFORMATTED_CNPJ, formatterToTest.unformat(INVALID_FORMATTED_CNPJ));
+		assertEquals(INVALID_UNFORMATTED_CNPJ, formatterToTest.unformat(INVALID_UNFORMATTED_CNPJ));
 
 	}
 

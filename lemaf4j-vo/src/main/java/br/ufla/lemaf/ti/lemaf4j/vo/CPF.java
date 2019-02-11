@@ -24,10 +24,10 @@ public final class CPF extends AbstractStringValueObject implements Formattable<
 
     private static final long serialVersionUID = 1L;
 
-    private static CPFFormatter formatter = new CPFFormatter();
+    private static CPFFormatter cpfFormatter = new CPFFormatter();
     private static CPFValidator validator = new CPFValidator();
 
-    private String codigo;
+    private String codigoCPF;
 
     /**
      * Construtor padrão contendo o código do CPF.
@@ -41,7 +41,7 @@ public final class CPF extends AbstractStringValueObject implements Formattable<
 
         validator.assertValid(codigoCpf);
 
-        this.codigo = formatter.unformat(codigoCpf);
+        this.codigoCPF = cpfFormatter.unformat(codigoCpf);
     }
 
     /**
@@ -57,7 +57,7 @@ public final class CPF extends AbstractStringValueObject implements Formattable<
      */
     @Override
     public String formatted() {
-        return formatter.format(codigo);
+        return cpfFormatter.format(codigoCPF);
     }
 
     /**
@@ -65,7 +65,7 @@ public final class CPF extends AbstractStringValueObject implements Formattable<
      */
     @Override
     public String asBaseType() {
-        return codigo;
+        return codigoCPF;
     }
 
     /**

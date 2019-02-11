@@ -23,10 +23,10 @@ public class CNPJ extends AbstractStringValueObject implements Formattable<Strin
 
 	private static final long serialVersionUID = 1L;
 
-	private static CNPJFormatter formatter = new CNPJFormatter();
+	private static CNPJFormatter cnpjFormatter = new CNPJFormatter();
 	private static CNPJValidator validator = new CNPJValidator();
 
-	private String codigo;
+	private String codigoCNPJ;
 
 	/**
 	 * Construtor padrão de CNPJ.
@@ -40,7 +40,7 @@ public class CNPJ extends AbstractStringValueObject implements Formattable<Strin
 
 		validator.assertValid(codigoCnpj);
 
-		this.codigo = formatter.unformat(codigoCnpj);
+		this.codigoCNPJ = cnpjFormatter.unformat(codigoCnpj);
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class CNPJ extends AbstractStringValueObject implements Formattable<Strin
 	 */
 	@Override
 	public String formatted() {
-		return formatter.format(codigo);
+		return cnpjFormatter.format(codigoCNPJ);
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class CNPJ extends AbstractStringValueObject implements Formattable<Strin
 	 */
 	@Override
 	public String asBaseType() {
-		return codigo;
+		return codigoCNPJ;
 	}
 
 	/**

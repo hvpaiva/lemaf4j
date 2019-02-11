@@ -49,14 +49,14 @@ public class CNPJConverterTest {
 
 	@Test
 	public final void shouldTestfromVO() {
-		assertEquals(converterToTest.fromVO(new CNPJ(VALID_FORMATTED_CNPJ)), VALID_UNFORMATTED_CNPJ);
-		assertEquals(converterToTest.fromVO(new CNPJ(VALID_UNFORMATTED_CNPJ)), VALID_UNFORMATTED_CNPJ);
+		assertEquals(VALID_UNFORMATTED_CNPJ, converterToTest.fromVO(new CNPJ(VALID_FORMATTED_CNPJ)));
+		assertEquals(VALID_UNFORMATTED_CNPJ, converterToTest.fromVO(new CNPJ(VALID_UNFORMATTED_CNPJ)));
 	}
 
 	@Test
 	public final void shouldTestConvertToDatabaseColumn() {
-		assertEquals(converterToTest.convertToDatabaseColumn(new CNPJ(VALID_UNFORMATTED_CNPJ)), VALID_UNFORMATTED_CNPJ);
-		assertEquals(converterToTest.convertToDatabaseColumn(new CNPJ(VALID_UNFORMATTED_CNPJ)), VALID_UNFORMATTED_CNPJ);
+		assertEquals(VALID_UNFORMATTED_CNPJ, converterToTest.convertToDatabaseColumn(new CNPJ(VALID_UNFORMATTED_CNPJ)));
+		assertEquals(VALID_UNFORMATTED_CNPJ, converterToTest.convertToDatabaseColumn(new CNPJ(VALID_UNFORMATTED_CNPJ)));
 	}
 
 	@Test
@@ -92,7 +92,7 @@ public class CNPJConverterTest {
 		final Data data = new Data();
 		data.cnpj = new CNPJ(VALID_FORMATTED_CNPJ);
 
-		assertEquals(marshal(data, Data.class), XML);
+		assertEquals(XML, marshal(data, Data.class));
 	}
 
 	@Test
@@ -112,7 +112,7 @@ public class CNPJConverterTest {
 		} catch (final RuntimeException ex) {
 			assertNotNull(ex.getCause());
 			assertNotNull(ex.getCause().getCause());
-			assertEquals(ex.getCause().getCause().getMessage(), "CNPJError: CNPJ INVALIDO '0000000000000000'");
+			assertEquals("CNPJError: CNPJ INVALIDO '0000000000000000'", ex.getCause().getCause().getMessage());
 		}
 	}
 }
